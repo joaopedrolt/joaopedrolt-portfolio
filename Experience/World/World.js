@@ -10,6 +10,11 @@ export default class World {
         this.scene = this.experience.scene;
         this.canvas = this.experience.canvas;
         this.camera = this.experience.camera;
+        this.resources = this.experience.resources;
+
+        this.resources.on('ready', ()=>{
+            console.log('Carregou, world.js');
+        });
 
         this.room = new Room();
     }
