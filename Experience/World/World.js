@@ -1,5 +1,5 @@
 import Experience from '../Experience';
-import * as THREE from 'three';
+import Environment from './Environment';
 
 import Room from "./Room";
 
@@ -12,11 +12,10 @@ export default class World {
         this.camera = this.experience.camera;
         this.resources = this.experience.resources;
 
-        this.resources.on('ready', ()=>{
-            console.log('Carregou, world.js');
+        this.resources.on('ready', () => {
+            this.room = new Room();
+            this.room = new Environment();
         });
-
-        this.room = new Room();
     }
 
     resize() {

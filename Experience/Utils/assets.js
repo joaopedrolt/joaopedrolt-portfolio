@@ -1,7 +1,7 @@
 export default [
     {
-        name: "house",
+        name: "room",
         type: "glbModel",
-        path: "/models/wraith.glb"
+        path: "/models/myRoom.glb"
     }
 ]
