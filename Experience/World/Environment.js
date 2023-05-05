@@ -27,10 +27,10 @@ export default class Environment {
 
         this.sunLight.position.set(1, 5, 7);
 
-        const helper = new THREE.DirectionalLightHelper(this.sunLight, 5);
+        /* const helper = new THREE.DirectionalLightHelper(this.sunLight, 5); */
 
         this.scene.add(this.sunLight);
-        this.scene.add(helper);
+        /* this.scene.add(helper); */
         
         this.ambientLight = new THREE.AmbientLight("#ffffff", 1);
         this.scene.add(this.ambientLight);

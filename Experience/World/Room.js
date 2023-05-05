@@ -32,6 +32,12 @@ export default class Room {
                     groupchild.receiveShadow = true;
                 });
             }
+
+            if (child.name === "Screen") {
+                child.material = new THREE.MeshBasicMaterial({
+                    map: this.resources.items.screen,
+                });
+            }
         });
 
         this.scene.add(this.actualRoom);
@@ -40,7 +46,7 @@ export default class Room {
     onMouseMove() {
         window.addEventListener('mousemove', (e) => {
             this.rotation = ((e.clientX - window.innerWidth / 2) * 2) / window.innerWidth;
-            this.lerp.target = this.rotation * 0.1;
+            this.lerp.target = this.rotation * 0.13;
         });
     }
 
