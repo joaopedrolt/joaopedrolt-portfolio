@@ -15,9 +15,9 @@ export default class World {
         this.resources = this.experience.resources;
 
         this.resources.on('ready', () => {
-            this.room = new Room();
             this.environment = new Environment();
             this.floor = new Floor();
+            this.room = new Room();
             this.controls = new Controls();
         });
     }

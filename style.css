@@ -40,8 +40,9 @@ body {
   left: 0;
   bottom: 0;
   right: 0;
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 0 auto;
+  color: #444444;
 }
 
 .hud .top-title {
@@ -52,7 +53,7 @@ body {
 
 .hud .bottom-title {
   position: absolute;
-  bottom: 120px;
+  bottom: 150px;
   left: 0;
 }
 
@@ -63,11 +64,51 @@ body {
 }
 
 .hud .bottom-title h1 {
-  font-size: 50px;
+  font-size: 45px;
   font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 5px;
 }
 
 .hud .bottom-title p {
   font-size: 18px;
   font-weight: 500;
+  padding: 2px;
+}
+
+.hud .scroll-down-arrow {
+  position: absolute;
+  left: 50%;
+  right: 50%;
+  bottom: 50px;
+}
+
+.mouse {
+	width: 35px;
+	height: 60px;
+	border: 2px solid #333332;
+	border-radius: 60px;
+	position: relative;
+}
+
+.mouse::before{
+  content: '';
+  width: 8px;
+  height: 8px;
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  border-radius: 50%;
+  opacity: 1;
+  animation: wheel 2s infinite;
+  -webkit-animation: wheel 2s infinite;
+}
+
+@keyframes wheel {
+	to {
+		opacity: 0;
+		bottom: 40px;
+	}
 }

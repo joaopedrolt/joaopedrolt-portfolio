@@ -7,6 +7,9 @@ export default class Controls {
         this.resources = this.experience.resources;
         this.camera = this.experience.camera;
 
+        this.circleFirst = this.experience.world.floor.circleFirst;
+        console.log(this.circleFirst);
+
         /*
             this.setPath();
             this.onWheel(); 

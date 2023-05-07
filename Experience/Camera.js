@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import Experience from "./Experience";
+import * as dat from 'dat.gui'
 
 export default class Camera {
     constructor() {
@@ -9,7 +10,7 @@ export default class Camera {
         this.scene = this.experience.scene;
         this.canvas = this.experience.canvas;
 
-       /*  this.gui = new dat.GUI(); */
+        this.gui = new dat.GUI();
 
         this.createPerspectiveCamera();
         this.createOrthographicCamera();
@@ -36,17 +37,17 @@ export default class Camera {
             50
         );
 
-        this.orthographicCamera.position.y = 3.6;
-        this.orthographicCamera.position.x = 0.1;
+        this.orthographicCamera.position.y = 3.4;
+        this.orthographicCamera.position.x = -0.1;
         this.orthographicCamera.position.z = 5;
 
-  /*       this.gui.add(this.orthographicCamera.rotation, 'x', -2, 3, 0.1);
+        /* this.gui.add(this.orthographicCamera.rotation, 'x', -2, 3, 0.1);
         this.gui.add(this.orthographicCamera.rotation, 'y', 0, 5, 0.1);
-        this.gui.add(this.orthographicCamera.rotation, 'z', 0, 5, 0.1);
+        this.gui.add(this.orthographicCamera.rotation, 'z', 0, 5, 0.1); */
 
         this.gui.add(this.orthographicCamera.position, 'x', -2, 3, 0.1);
         this.gui.add(this.orthographicCamera.position, 'y', 0, 5, 0.1);
-        this.gui.add(this.orthographicCamera.position, 'z', 0, 5, 0.1); */
+        this.gui.add(this.orthographicCamera.position, 'z', 0, 5, 0.1);
 
         this.orthographicCamera.rotation.x = -Math.PI / 6;
 
