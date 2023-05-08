@@ -25,11 +25,11 @@ export default class Floor {
     }
 
     setCircles() {
-        const geometry = new THREE.CircleGeometry(5, 32);
-        const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+        const geometry = new THREE.CircleGeometry(5, 64);
+        const material = new THREE.MeshStandardMaterial({ color: 0x99A081 });
         this.circleFirst = new THREE.Mesh(geometry, material);
         this.circleFirst.position.y = -0.29;
-        this.circleFirst.scale.set(0, 0, 0);
+        this.circleFirst.scale.set(0.4, 0.4, 0.4);
         this.circleFirst.rotation.x = -Math.PI / 2;
         this.circleFirst.receiveShadow = true;
         this.scene.add(this.circleFirst);

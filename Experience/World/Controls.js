@@ -1,4 +1,7 @@
 import Experience from "../Experience";
+import GSAP from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger.js";
+import ASScroll from "@ashthornton/asscroll";
 
 export default class Controls {
     constructor() {
@@ -6,81 +9,84 @@ export default class Controls {
         this.scene = this.experience.scene;
         this.resources = this.experience.resources;
         this.camera = this.experience.camera;
+        this.room = this.experience.world.room.actualRoom;
 
         this.circleFirst = this.experience.world.floor.circleFirst;
-        console.log(this.circleFirst);
 
-        /*
-            this.setPath();
-            this.onWheel(); 
-        */
+        GSAP.registerPlugin(ScrollTrigger);
+
+        this.setSmoothScroll();
+        this.setScrollTrigger();
     }
 
-    /* 
-        setPath() {
-            this.curve = new THREE.CatmullRomCurve3([
-                new THREE.Vector3(-5, 0, 0),
-                new THREE.Vector3(0, 0, -5),
-                new THREE.Vector3(5, 0, 0),
-                new THREE.Vector3(0, 0, 5),
-            ], true);
-    
-            const points = this.curve.getPoints(50);
-            const geometry = new THREE.BufferGeometry().setFromPoints(points);
-    
-            const material = new THREE.LineBasicMaterial({ color: 0xff0000 });
-    
-            const curveObject = new THREE.Line(geometry, material);
-    
-            this.scene.add(curveObject);
-        }
-    
-        onWheel() {
-            window.addEventListener('wheel', (e) => {
-                console.log(e);
-                if (e.deltaY > 0) {
-                    this.lerp.target += 0.01;
-                } else {
-                    this.lerp.target -= 0.01;
+    setupASScroll() {
+        const asscroll = new ASScroll({
+            ease: 0.1,
+            disableRaf: true,
+        });
+
+        GSAP.ticker.add(asscroll.update);
+
+        ScrollTrigger.defaults({
+            scroller: asscroll.containerElement,
+        });
+
+        ScrollTrigger.scrollerProxy(asscroll.containerElement, {
+            scrollTop(value) {
+                if (arguments.length) {
+                    asscroll.currentPos = value;
+                    return;
                 }
+                return asscroll.currentPos;
+            },
+            getBoundingClientRect() {
+                return {
+                    top: 0,
+                    left: 0,
+                    width: window.innerWidth,
+                    height: window.innerHeight,
+                };
+            },
+            fixedMarkers: true,
+        });
+
+        asscroll.on("update", ScrollTrigger.update);
+        ScrollTrigger.addEventListener("refresh", asscroll.resize);
+
+        requestAnimationFrame(() => {
+            asscroll.enable({
+                newScrollElements: document.querySelectorAll(
+                    ".gsap-marker-start, .gsap-marker-end, [asscroll]"
+                ),
             });
-        } 
-    */
+        });
+        return asscroll;
+    }
+
+    setSmoothScroll() {
+        this.asscroll = this.setupASScroll();
+    }
+
+    setScrollTrigger() {
+        this.firstSection = new GSAP.timeline({
+            scrollTrigger: {
+                trigger: ".first",
+                start: "top top",
+                end: "bottom top",
+                scrub: true
+            }
+        }).to(this.circleFirst.scale, {
+            x: 0,
+            y: 0,
+            z: 0
+        }).to('.hud-wrapper', {
+            opacity: 0,
+        });
+    }
 
     resize() {
-
     }
 
     update() {
-        /*
-               this.curve.getPointAt(this.lerp.current % 1, this.position);
-               this.camera.orthographicCamera.position.copy(this.position);
-       
-               this.directionalVector.subVectors(
-                   this.curve.getPointAt((this.lerp.current % 1) + 0.000001),
-                   this.position
-               );
-               this.directionalVector.normalize();
-               this.crossVector.crossVectors(
-                   this.directionalVector,
-                   this.staticVector
-               );
-               this.crossVector.multiplyScalar(100000);
-               this.camera.orthographicCamera.lookAt(this.crossVector);
-       
-                if (this.back) {
-                    this.lerp.target -= 0.001;
-                } else {
-                    this.lerp.target += 0.001;
-                }
-                this.lerp.target += 0.001;
-                this.lerp.target = GSAP.utils.clamp(0, 1, this.lerp.target);
-                this.lerp.current = GSAP.utils.clamp(0, 1, this.lerp.current);
-                
-        
-                this.curve.getPointAt(this.lerp.current+0.00001, this.lookAtPosition);
-        
-       
-                 */
     }
 }

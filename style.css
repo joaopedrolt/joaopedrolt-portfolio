@@ -17,7 +17,12 @@ body {
 
 /* Home */
 
-.home {
+.intro {
+  width: 100vw;
+  height: 100vh;
+}
+
+.temp-section {
   width: 100vw;
   height: 100vh;
 }
@@ -38,45 +43,50 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  bottom: 0;
   right: 0;
-  max-width: 1200px;
-  margin: 0 auto;
+  height: 100vh;
   color: #444444;
 }
 
-.hud .top-title {
+.hud .hud-wrapper {
+  position: relative;
+  height: 100vh;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.hud .hud-wrapper .top-title {
   position: absolute;
   top: calc(50% - 120px);
   right: 0;
 }
 
-.hud .bottom-title {
+.hud .hud-wrapper .bottom-title {
   position: absolute;
   bottom: 150px;
   left: 0;
 }
 
-.hud .top-title h2 {
+.hud .hud-wrapper .top-title h2 {
   font-size: 30px;
   font-weight: 400;
   text-align: left;
 }
 
-.hud .bottom-title h1 {
+.hud .hud-wrapper .bottom-title h1 {
   font-size: 45px;
   font-weight: 700;
   line-height: 1.2;
   margin-bottom: 5px;
 }
 
-.hud .bottom-title p {
+.hud .hud-wrapper .bottom-title p {
   font-size: 18px;
   font-weight: 500;
   padding: 2px;
 }
 
-.hud .scroll-down-arrow {
+.hud .hud-wrapper .scroll-down-arrow {
   position: absolute;
   left: 50%;
   right: 50%;
@@ -84,14 +94,14 @@ body {
 }
 
 .mouse {
-	width: 35px;
-	height: 60px;
-	border: 2px solid #333332;
-	border-radius: 60px;
-	position: relative;
+  width: 35px;
+  height: 60px;
+  border: 2px solid #333332;
+  border-radius: 60px;
+  position: relative;
 }
 
-.mouse::before{
+.mouse::before {
   content: '';
   width: 8px;
   height: 8px;
@@ -107,8 +117,8 @@ body {
 }
 
 @keyframes wheel {
-	to {
-		opacity: 0;
-		bottom: 40px;
-	}
+  to {
+    opacity: 0;
+    bottom: 40px;
+  }
 }
