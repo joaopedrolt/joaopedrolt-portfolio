@@ -3,6 +3,7 @@ import * as THREE from 'three';
 import Sizes from './Utils/Sizes';
 import Time from './Utils/Time';
 import Resources from './Utils/Resources';
+import Compatibility from './Utils/Compatibility';
 import assets from './Utils/assets';
 
 import Camera from './Camera';
@@ -23,9 +24,10 @@ export default class Experience {
         this.sizes = new Sizes();
         this.camera = new Camera();
         this.renderer = new Renderer();
+        this.compatibility = new Compatibility;
         this.resources = new Resources(assets);
-        this.world = new  World();
-        
+        this.world = new World();
+
         this.time.on('update', () => {
             this.update();
         });
@@ -42,7 +44,9 @@ export default class Experience {
     }
 
     resize() {
-        this.camera.resize();
-        this.renderer.resize();
+        if (!(this.compatibility.isMobileDevice)) {
+            this.camera.resize();
+            this.renderer.resize();
+        }
     }
 }

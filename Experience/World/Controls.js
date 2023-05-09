@@ -11,7 +11,7 @@ export default class Controls {
         this.camera = this.experience.camera;
         this.room = this.experience.world.room.actualRoom;
 
-        this.circleFirst = this.experience.world.floor.circleFirst;
+        this.circle = this.experience.world.floor.circle;
 
         GSAP.registerPlugin(ScrollTrigger);
 
@@ -68,19 +68,36 @@ export default class Controls {
     }
 
     setScrollTrigger() {
-        this.firstSection = new GSAP.timeline({
-            scrollTrigger: {
-                trigger: ".first",
-                start: "top top",
-                end: "bottom top",
-                scrub: true
+        ScrollTrigger.matchMedia({
+
+            "(min-width: 969px)": () => {
+                this.room.scale.set(1, 1, 1);
+                this.circle.scale.set(0.4, 0.4, 0.4);
+
+                this.firstSection = new GSAP.timeline({
+                    scrollTrigger: {
+                        trigger: ".intro",
+                        start: "top top",
+                        end: "bottom top",
+                        scrub: true
+                    }
+                }).to(this.circle.scale, {
+                    x: 0,
+                    y: 0,
+                    z: 0
+                }).to('.hud-wrapper', {
+                    opacity: 0,
+                });
+            },
+
+            "(max-width: 968px)": () => {
+                this.room.scale.set(0.65, 0.65, 0.65);
+                this.circle.scale.set(0, 0, 0);
+            },
+
+            all: () => {
+
             }
-        }).to(this.circleFirst.scale, {
-            x: 0,
-            y: 0,
-            z: 0
-        }).to('.hud-wrapper', {
-            opacity: 0,
         });
     }
 

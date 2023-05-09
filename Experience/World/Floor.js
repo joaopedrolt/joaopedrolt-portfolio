@@ -7,7 +7,7 @@ export default class Floor {
         this.scene = this.experience.scene;
 
         this.setFloor();
-        this.setCircles();
+        this.setCircle();
     }
 
     setFloor() {
@@ -24,21 +24,15 @@ export default class Floor {
         this.plane.receiveShadow = true;
     }
 
-    setCircles() {
+    setCircle() {
         const geometry = new THREE.CircleGeometry(5, 64);
         const material = new THREE.MeshStandardMaterial({ color: 0x99A081 });
-        this.circleFirst = new THREE.Mesh(geometry, material);
-        this.circleFirst.position.y = -0.29;
-        this.circleFirst.scale.set(0.4, 0.4, 0.4);
-        this.circleFirst.rotation.x = -Math.PI / 2;
-        this.circleFirst.receiveShadow = true;
-        this.scene.add(this.circleFirst);
-
-
-        /*         const material2 = new THREE.MeshBasicMaterial({ color: 0xffff00 });
-        const material3 = new THREE.MeshBasicMaterial({ color: 0xffff00 }); */
-        /*         this.circleSecond = new THREE.Mesh(geometry, material); scene.add(circle2);
-                this.circleThird = new THREE.Mesh(geometry, material); scene.add(circle3); */
+        this.circle = new THREE.Mesh(geometry, material);
+        this.circle.position.y = -0.29;
+        this.circle.scale.set(0.4, 0.4, 0.4);
+        this.circle.rotation.x = -Math.PI / 2;
+        this.circle.receiveShadow = true;
+        this.scene.add(this.circle);
     }
 
     resize() {
