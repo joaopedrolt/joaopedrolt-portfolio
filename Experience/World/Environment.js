@@ -1,45 +1,30 @@
 import Experience from "../Experience";
-import * as THREE from 'three';
+import * as THREE from "three";
 
 export default class Environment {
-    constructor() {
-        this.experience = new Experience();
-        this.scene = this.experience.scene;
+  constructor() {
+    this.experience = new Experience();
+    this.scene = this.experience.scene;
 
-     /*    const size = 20;
-        const divisions = 20;
+    this.setSunLight();
+  }
 
-        const gridHelper = new THREE.GridHelper(size, divisions);
-        this.scene.add(gridHelper);
+  setSunLight() {
+    this.sunLight = new THREE.DirectionalLight("#ffffff", 1.3);
+    this.sunLight.castShadow = true;
+    this.sunLight.shadow.camera.far = 20;
+    this.sunLight.shadow.mapSize.set(2048, 2048);
+    this.sunLight.shadow.normalBias = 0.05;
 
-        const axesHelper = new THREE.AxesHelper(5);
-        this.scene.add(axesHelper); */
+    this.sunLight.position.set(1, 5, 7);
 
-        this.setSunLight();
-    }
+    this.scene.add(this.sunLight);
 
-    setSunLight() {
-        this.sunLight = new THREE.DirectionalLight("#ffffff", 1.3);
-        this.sunLight.castShadow = true;
-        this.sunLight.shadow.camera.far = 20;
-        this.sunLight.shadow.mapSize.set(2048, 2048);
-        this.sunLight.shadow.normalBias = 0.05;
+    this.ambientLight = new THREE.AmbientLight("#ffffff", 1);
+    this.scene.add(this.ambientLight);
+  }
 
-        this.sunLight.position.set(1, 5, 7);
+  resize() {}
 
-        /* const helper = new THREE.DirectionalLightHelper(this.sunLight, 5); */
-
-        this.scene.add(this.sunLight);
-        /* this.scene.add(helper); */
-        
-        this.ambientLight = new THREE.AmbientLight("#ffffff", 1);
-        this.scene.add(this.ambientLight);
-    }
-
-    resize() {
-
-    }
-
-    update() {
-    }
+  update() {}
 }

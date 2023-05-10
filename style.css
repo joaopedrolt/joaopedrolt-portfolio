@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 * {
   margin: 0;
@@ -8,18 +7,63 @@
   outline: 0;
   box-sizing: border-box;
   text-decoration: none;
+  font-family: "Montserrat", sans-serif;
 }
 
 html,
 body {
-  font-family: "Montserrat", sans-serif;
+  /*   overflow-x: hidden; */
+}
+
+html {
+  font-size: 90%;
+}
+
+@media (max-width: 1300px) {
+  html {
+    font-size: 75%;
+  }
+
+  .mouse {
+    width: 28px !important;
+    height: 50px !important;
+  }
+}
+
+@media (max-width: 968px) {
+  .hud .hud-wrapper .top-title {
+    top: 17% !important;
+  }
+}
+
+@media (max-width: 600px) {
+  html {
+    font-size: 70%;
+  }
+
+  .hud .hud-wrapper .top-title {
+    justify-content: center !important;
+    text-align: center !important;
+  }
+
+  .hud .hud-wrapper .bottom-title {
+    text-align: center !important;
+    bottom: 16% !important;
+  }
+}
+
+.page,
+.page-wrapper {
+  overflow: hidden;
 }
 
 /* Home */
 
 .intro {
-  width: 100vw;
-  height: 100vh;
+  position: relative;
+  width: 100%;
+  min-height: -webkit-fill-available;
+  /*  overflow-x: hidden; */
 }
 
 .temp-section {
@@ -44,69 +88,77 @@ body {
   top: 0;
   left: 0;
   right: 0;
-  height: 100vh;
+  bottom: 0;
   color: #444444;
+  padding: 0 30px;
 }
 
 .hud .hud-wrapper {
   position: relative;
-  height: 100vh;
-  max-width: 1200px;
+  height: 100%;
+  max-width: 1480px;
   margin: 0 auto;
 }
 
 .hud .hud-wrapper .top-title {
   position: absolute;
   top: calc(50% - 120px);
-  right: 0;
+  width: 100%;
+  display: flex;
+  justify-content: right;
+  text-align: left;
+}
+
+.hud .hud-wrapper .top-title h2 {
+  font-size: 2rem;
+  font-weight: 400;
 }
 
 .hud .hud-wrapper .bottom-title {
   position: absolute;
   bottom: 150px;
-  left: 0;
-}
-
-.hud .hud-wrapper .top-title h2 {
-  font-size: 30px;
-  font-weight: 400;
+  width: 100%;
+  display: flex;
+  align-items: left;
+  flex-direction: column;
   text-align: left;
 }
 
 .hud .hud-wrapper .bottom-title h1 {
-  font-size: 45px;
+  font-size: 3rem;
   font-weight: 700;
   line-height: 1.2;
   margin-bottom: 5px;
 }
 
 .hud .hud-wrapper .bottom-title p {
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: 500;
   padding: 2px;
 }
 
 .hud .hud-wrapper .scroll-down-arrow {
   position: absolute;
-  left: 50%;
-  right: 50%;
-  bottom: 50px;
+  display: flex;
+  justify-content: center;
+  bottom: 40px;
+  width: 100%;
 }
 
 .mouse {
-  width: 35px;
-  height: 60px;
+  width: 30px;
+  height: 55px;
   border: 2px solid #333332;
   border-radius: 60px;
   position: relative;
 }
 
 .mouse::before {
-  content: '';
+  content: "";
   width: 8px;
   height: 8px;
   position: absolute;
-  bottom: 10px;
+  bottom: 7px;
   left: 50%;
   transform: translateX(-50%);
   background-color: #333;
@@ -119,6 +171,6 @@ body {
 @keyframes wheel {
   to {
     opacity: 0;
-    bottom: 40px;
+    bottom: 32.7px;
   }
 }
