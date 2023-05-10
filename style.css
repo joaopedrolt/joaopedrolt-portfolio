@@ -10,12 +10,8 @@
   font-family: "Montserrat", sans-serif;
 }
 
-html,
-body {
-  /*   overflow-x: hidden; */
-}
-
 html {
+  overflow-x: hidden;
   font-size: 90%;
 }
 
@@ -48,7 +44,11 @@ html {
 
   .hud .hud-wrapper .bottom-title {
     text-align: center !important;
-    bottom: 16% !important;
+    bottom: 15% !important;
+  }
+
+  .hud .hud-wrapper .scroll-down-arrow {
+    bottom: 4% !important;
   }
 }
 
@@ -63,7 +63,6 @@ html {
   position: relative;
   width: 100%;
   min-height: -webkit-fill-available;
-  /*  overflow-x: hidden; */
 }
 
 .temp-section {

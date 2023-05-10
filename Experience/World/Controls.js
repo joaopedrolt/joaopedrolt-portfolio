@@ -68,6 +68,9 @@ export default class Controls {
   setScrollTrigger() {
     ScrollTrigger.matchMedia({
       "(min-width: 969px)": () => {
+        this.room.scale.set(0.9, 0.9, 0.9);
+        this.circle.scale.set(0.4, 0.4, 0.4);
+
         this.firstSection = new GSAP.timeline({
           scrollTrigger: {
             trigger: ".intro",
@@ -89,6 +92,9 @@ export default class Controls {
 
       "(max-width: 968px)": () => {
         this.room.scale.set(0.65, 0.65, 0.65);
+        if(this.circle){
+          this.circle.scale.set(0, 0, 0);
+        }
       },
 
       "(max-width: 600px)": () => {
