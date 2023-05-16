@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import Experience from "./Experience";
-import * as dat from "dat.gui";
+/* import * as dat from "dat.gui"; */
 
 export default class Camera {
   constructor() {

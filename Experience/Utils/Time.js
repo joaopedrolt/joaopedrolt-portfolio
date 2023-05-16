@@ -18,7 +18,7 @@ export default class Time extends EventEmitter {
       this.setAnimation(visible);
     });
 
-     this.fpsTracker();
+    this.fpsTracker();
   }
 
   setAnimation(visible) {

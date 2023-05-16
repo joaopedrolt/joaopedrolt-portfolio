@@ -1,7 +1,7 @@
 import Experience from "../Experience";
 import * as THREE from "three";
 import GSAP from "gsap";
-import * as dat from "dat.gui";
+/* import * as dat from "dat.gui"; */
 
 export default class Environment {
   constructor() {
@@ -26,7 +26,6 @@ export default class Environment {
 
     this.ambientLight = new THREE.AmbientLight("#ffffff", 1);
     this.scene.add(this.ambientLight);
-    console.log(this.ambientLight);
   }
 
   switchTheme(theme) {
@@ -65,7 +64,6 @@ export default class Environment {
         intensity: 1,
       });
     }
-    console.log(this.ambientLight);
   }
 
   setGUI() {
@@ -83,7 +81,7 @@ export default class Environment {
     this.gui.add(this.obj, "intensity", 0, 10).onChange(() => {
       this.sunLight.intensity = this.obj.intensity;
       this.sunLight.ambientLight = this.obj.intensity;
-  });
+    });
   }
 
   resize() {}
