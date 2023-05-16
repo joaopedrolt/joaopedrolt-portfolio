@@ -7,37 +7,32 @@ export default class Time extends EventEmitter {
     super();
     this.experience = new Experience();
     this.canvas = this.experience.canvas;
+    this.observer = this.experience.observer;
     this.start = Date.now();
     this.current = this.start;
     this.elapsed = 0;
     this.delta = 16;
     this.animationFrameId = null;
 
-    this.fpsTracker();
-
-    this.setCanvasObserver();
-  }
-
-  setCanvasObserver() {
-    this.observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          this.update();
-          console.log(`voltou`);
-        } else {
-          this.stopUpdating();
-          console.log(`parou`);
-        }
-      });
+    this.observer.on("canvasVisible", (visible) => {
+      this.setAnimation(visible);
     });
 
-    this.observer.observe(this.canvas);
+     this.fpsTracker();
+  }
+
+  setAnimation(visible) {
+    if (visible) {
+      this.update();
+    } else {
+      this.stopUpdating();
+    }
   }
 
   fpsTracker() {
     this.stats = new Stats();
     this.stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
-    document.body.appendChild(this.stats.dom);
+    /* document.body.appendChild(this.stats.dom); */
   }
 
   update() {

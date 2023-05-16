@@ -7,14 +7,18 @@ export default class Controls {
   constructor() {
     this.experience = new Experience();
     this.camera = this.experience.camera;
+    this.observer = this.experience.observer;
     this.room = this.experience.world.room.actualRoom;
-
+    this.roomLight = this.experience.world.room.rectLight;
     this.circle = this.experience.world.floor.circle;
+    this.canvasVisible = false;
+    this.firstSection = null;
 
     GSAP.registerPlugin(ScrollTrigger);
 
     this.setSmoothScroll();
     this.setScrollTrigger();
+    this.setCanvasObserver();
   }
 
   setupASScroll() {
@@ -70,6 +74,7 @@ export default class Controls {
       "(min-width: 969px)": () => {
         this.room.scale.set(0.9, 0.9, 0.9);
         this.circle.scale.set(0.4, 0.4, 0.4);
+        this.roomLight.intensity = 5;
 
         this.firstSection = new GSAP.timeline({
           scrollTrigger: {
@@ -77,7 +82,10 @@ export default class Controls {
             start: "top top",
             end: "bottom top",
             scrub: true,
+            markers: true,
             invalidateOnRefresh: true,
+            onEnterBack: ({ progress, direction, isActive }) =>
+              console.log(progress, direction, isActive),
           },
         })
           .to(this.circle.scale, {
@@ -92,7 +100,8 @@ export default class Controls {
 
       "(max-width: 968px)": () => {
         this.room.scale.set(0.65, 0.65, 0.65);
-        if(this.circle){
+        this.roomLight.intensity = 2;
+        if (this.circle) {
           this.circle.scale.set(0, 0, 0);
         }
       },
@@ -104,6 +113,23 @@ export default class Controls {
       },
 
       all: () => {},
+    });
+  }
+
+  setCanvasObserver() {
+    this.observer.on("canvasVisible", (visible) => {
+      this.canvasVisible = visible;
+      if (this.canvasVisible) {
+        if (this.firstSection) {
+          this.firstSection.scrollTrigger.enable();
+          console.log("aaaaa");
+        }
+      } else {
+        if (this.firstSection) {
+          this.firstSection.scrollTrigger.disable();
+          console.log("bbbb");
+        }
+      }
     });
   }
 
