@@ -1,0 +1,23 @@
+$color-green: $color-green-light;
+$color-text: $color-text-light;
+$color-background: $color-background-light;
+
+.light-theme {
+  $color-green: $color-green-light;
+  $color-text: $color-text-light;
+  $color-background: $color-background-light;
+}
+
+.dark-theme {
+  $color-green: $color-green-dark;
+  $color-text: $color-text-dark;
+  $color-background: $color-background-dark;
+}
+
+h1,
+section,
+p,
+span,
+svg {
+  transition: background-color 0.5s, color 0.5s;
+}

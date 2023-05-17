@@ -53,7 +53,7 @@ html {
     font-size: 75%;
   }
 
-  .mouse {
+  .scroll-down-icon {
     width: 28px !important;
     height: 50px !important;
   }
@@ -79,7 +79,7 @@ html {
     bottom: 15% !important;
   }
 
-  .hud .hud-wrapper .scroll-down-arrow {
+  .hud .hud-wrapper .scroll-down-wrapper {
     bottom: 4% !important;
   }
 
@@ -99,12 +99,12 @@ html {
     width: 18px !important;
   }
 
-  .header {
-    height: 60px !important;
-  }
-
   .slide {
     left: 27px !important;
+  }
+
+  .header {
+    height: 60px !important;
   }
 }
 
@@ -199,7 +199,7 @@ html {
 
 /* Home */
 
-.intro {
+.home {
   position: relative;
   width: 100%;
   min-height: -webkit-fill-available;
@@ -276,7 +276,7 @@ html {
   padding: 2px;
 }
 
-.hud .hud-wrapper .scroll-down-arrow {
+.hud .hud-wrapper .scroll-down-wrapper {
   position: absolute;
   display: flex;
   justify-content: center;
@@ -284,7 +284,7 @@ html {
   width: 100%;
 }
 
-.mouse {
+.scroll-down-icon {
   width: 30px;
   height: 55px;
   border: 2px solid var(--color-text);
@@ -292,7 +292,7 @@ html {
   position: relative;
 }
 
-.mouse::before {
+.scroll-down-icon::before {
   content: "";
   width: 8px;
   height: 8px;

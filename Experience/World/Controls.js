@@ -78,7 +78,7 @@ export default class Controls {
 
         this.firstSection = new GSAP.timeline({
           scrollTrigger: {
-            trigger: ".intro",
+            trigger: ".home",
             start: "top top",
             end: "bottom top",
             scrub: true,
