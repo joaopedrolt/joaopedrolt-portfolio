@@ -1,23 +1,35 @@
-$color-green: $color-green-light;
-$color-text: $color-text-light;
-$color-background: $color-background-light;
-
 .light-theme {
-  $color-green: $color-green-light;
-  $color-text: $color-text-light;
-  $color-background: $color-background-light;
+  // Core
+  --color-green: var(--color-green-light);
+  --color-brown: var(--color-brown-light);
+  --color-text: var(--color-text-light);
+  --color-text-fade: var(--color-text-fade-light);
+  --color-background: var(--color-background-light);
+
+  // Theme Switcher
+  --toggle-circle: var(--color-text-light);
 }
 
 .dark-theme {
-  $color-green: $color-green-dark;
-  $color-text: $color-text-dark;
-  $color-background: $color-background-dark;
+  // Core
+  --color-green: var(--color-green-dark);
+  --color-brown: var(--color-brown-dark);
+  --color-text: var(--color-text-dark);
+  --color-text-fade: var(--color-text-fade-dark);
+  --color-background: var(--color-background-dark);
+
+  // Theme Switcher
+  --toggle-circle: var(--color-background-dark);
 }
 
-h1,
+/* h1,
 section,
 p,
 span,
 svg {
   transition: background-color 0.5s, color 0.5s;
+} */
+
+body {
+  background-color: var(--color-background);
 }

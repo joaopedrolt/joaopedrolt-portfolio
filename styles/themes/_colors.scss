@@ -1,9 +1,15 @@
-/* Light Theme Variables */
-$color-green-light: #d5d8c7;
-$color-text-light: #444444;
-$color-background-light: #f0f0f0;
+:root {
+  /* Light Theme Variables */
+  --color-green-light: #d5d8c7;
+  --color-brown-light: #9f8062;
+  --color-text-light: #444444;
+  --color-text-fade-light: #878a8f;
+  --color-background-light: #f0f0f0;
 
-/* Dark Theme Variables */
-$color-green-dark: #ffffff;
-$color-text-dark: #ffffff;
-$color-background-dark: #7681ac;
+  /* Dark Theme Variables */
+  --color-green-dark: #ffffff;
+  --color-brown-dark: #71471d;
+  --color-text-dark: #ffffff;
+  --color-text-fade-dark: #023183;
+  --color-background-dark: #91aadf;
+}

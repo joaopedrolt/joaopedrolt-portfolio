@@ -82,7 +82,7 @@ export default class Controls {
             start: "top top",
             end: "bottom top",
             scrub: true,
-            markers: true,
+            /* markers: true, */
             invalidateOnRefresh: true,
             onEnterBack: ({ progress, direction, isActive }) =>
               console.log(progress, direction, isActive),
@@ -93,7 +93,7 @@ export default class Controls {
             y: 0,
             z: 0,
           })
-          .to(".hud-wrapper", {
+          .to(".scroll-down-wrapper", {
             opacity: 0,
           });
       },

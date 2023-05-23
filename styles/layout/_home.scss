@@ -21,7 +21,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    color: #444444 /* var(--color-text) */;
+    color: var(--color-text);
     padding: 0 30px;
 
     .hud-wrapper {
@@ -39,7 +39,6 @@
         text-align: left;
 
         h2 {
-          font-size: 2rem;
           font-weight: 400;
         }
 
@@ -61,16 +60,8 @@
         text-align: left;
 
         h1 {
-          font-size: 3rem;
-          font-weight: 700;
           line-height: 1.2;
           margin-bottom: 5px;
-        }
-
-        p {
-          font-size: 1.125rem;
-          font-weight: 500;
-          padding: 2px;
         }
       }
 
@@ -84,7 +75,7 @@
         .scroll-down-icon {
           width: 30px;
           height: 55px;
-          border: 2px solid #444444 /* var(--color-text) */;
+          border: 2px solid var(--color-text);
           border-radius: 60px;
           position: relative;
 
@@ -96,7 +87,7 @@
             bottom: 7px;
             left: 50%;
             transform: translateX(-50%);
-            background-color: #444444 /* var(--color-text) */;
+            background-color: var(--color-text);
             border-radius: 50%;
             opacity: 1;
             animation: wheel 2s infinite;
