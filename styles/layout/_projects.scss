@@ -1,5 +1,5 @@
 .projects {
-  .heading{
+  .heading {
     margin-bottom: 50px;
   }
 
@@ -16,11 +16,11 @@
       height: 750px;
       margin-bottom: 30px;
 
-      &.left{
+      &.left {
         margin-right: 15px;
       }
 
-      &.right{
+      &.right {
         margin-left: 15px;
       }
 
@@ -41,7 +41,7 @@
         padding: 60px 50px 60px 50px;
 
         .card-heading {
-          color: white;
+          color: var(--color-white);
           text-align: center;
           height: 50%;
 
@@ -64,17 +64,18 @@
           display: flex;
           justify-content: center;
           height: 50%;
-          color: white;
+          color: var(--color-white);
 
           .info-wrapper {
             .box {
               transition: opacity 0.2s linear;
               opacity: 0;
-              border: 2px solid white;
+              border: 2px solid var(--color-white);
               padding: 15px 30px;
               border-radius: 20px;
               margin-bottom: 20px;
-              transition: background-color 0.2s linear;
+
+              @include button-hover(--color-white);
 
               i {
                 padding-right: 5px;
@@ -86,7 +87,6 @@
               }
 
               &:hover {
-                background-color: white;
                 color: var(--color-text);
               }
             }

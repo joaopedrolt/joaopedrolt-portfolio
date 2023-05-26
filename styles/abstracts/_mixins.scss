@@ -1,0 +1,9 @@
+@mixin button-hover($bg-color) {
+  transform: scale(1);
+  transition: background-color 0.2s linear, transform 0.2s linear;
+
+  &:hover {
+    background-color: var($bg-color);
+    transform: scale(1.04);
+  }
+}

@@ -1,11 +1,12 @@
 .light-theme {
   // Core
   --color-green: var(--color-green-light);
+  --color-white: var(--color-white-light);
   --color-brown: var(--color-brown-light);
   --color-text: var(--color-text-light);
   --color-text-fade: var(--color-text-fade-light);
   --color-background: var(--color-background-light);
-
+  
   // Theme Switcher
   --toggle-circle: var(--color-text-light);
 }
@@ -13,6 +14,7 @@
 .dark-theme {
   // Core
   --color-green: var(--color-green-dark);
+  --color-white: var(--color-white-dark);
   --color-brown: var(--color-brown-dark);
   --color-text: var(--color-text-dark);
   --color-text-fade: var(--color-text-fade-dark);

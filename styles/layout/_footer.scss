@@ -1,0 +1,45 @@
+.footer {
+  border-top: 1px solid var(--color-text-fade);
+  padding: 70px 0;
+
+  .box-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 70px;
+
+    .box {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      ul {
+        list-style-type: none;
+
+        li {
+          padding: 10px 0;
+
+          i {
+            padding-right: 10px;
+          }
+
+          .arrow {
+            transition: padding 0.2s linear;
+          }
+
+          a {
+            color: var(--color-text) !important;
+            display: block;
+            width: 100%;
+          }
+
+          &:hover {
+            .arrow {
+              padding-right: 16px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
