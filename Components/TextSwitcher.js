@@ -5,10 +5,11 @@ export default class TextSwitcher {
     this.ghostID = document.getElementById("ghost-text");
     this.texts = ["Developer", "Freelancer", "Engineer"];
     this.counter = 1;
+    this.switchingDelay = 4000;
 
     setInterval(() => {
       this.switchText();
-    }, 5000);
+    }, 4000);
   }
 
   switchText() {

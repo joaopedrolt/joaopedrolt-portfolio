@@ -13,7 +13,7 @@ export default class Form {
         setTimeout(() => {
           this.formContainerID.innerHTML = `
           <div class="form" id="form">
-          <h5>Envie uma mensagem</h5>
+          <span>Envie uma mensagem</span>
           <div class="row">
             <div class="input-wrapper">
               <label>Nome</label>
