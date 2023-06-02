@@ -4,6 +4,10 @@
       margin: 15px auto 30px auto;
       text-transform: uppercase;
       line-height: 1.35;
+
+      @media (max-width: $mobile) {
+        font-size: 1.5rem;
+      }
     }
 
     h3 {

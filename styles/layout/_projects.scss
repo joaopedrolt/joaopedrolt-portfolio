@@ -8,7 +8,6 @@
 
     .project-card {
       position: relative;
-      cursor: pointer;
       width: calc(50% - 15px);
       background-position: center;
       overflow: hidden;
@@ -38,25 +37,34 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        padding: 80px 50px 0px 50px;
+        padding: 80px 50px 80px 50px;
 
         .card-heading {
           color: var(--color-white);
           text-align: center;
           height: 50%;
+          opacity: 0;
+          transition: opacity 0.2s linear;
+          display: flex;
+          flex-direction: column;
 
-          span {
+          .date {
             font-size: 14px;
             text-transform: uppercase;
             font-weight: 400;
           }
 
-          p {
+          .title {
             font-size: 2rem;
-            line-height: 2.5rem;
             padding-top: 3px;
             padding-bottom: 2px;
             font-weight: 800;
+          }
+
+          .tools{
+            font-size: 2rem;
+            line-height: 2.5rem;
+            font-weight: 400;
           }
         }
 
@@ -67,11 +75,15 @@
           color: var(--color-white);
 
           .info-wrapper {
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+
             .box {
               display: block;
               opacity: 0;
-              border: 2px solid var(--color-white);
-              padding: 15px 30px;
+              border: 1px solid var(--color-white);
+              padding: 17px 32px;
               border-radius: 20px;
               margin-bottom: 20px;
               font-weight: 500;
@@ -97,7 +109,7 @@
         }
 
         @media (max-width: $mobile) {
-          padding: 80px 20px;
+          padding: 80px 40px;
         }
       }
 
@@ -130,7 +142,7 @@
 
       &:hover {
         &::before {
-          opacity: 0.7;
+          opacity: 0.9;
         }
 
         img {
@@ -138,6 +150,10 @@
         }
 
         .card-wrapper {
+          .card-heading{
+            opacity: 1;
+          }
+
           .card-info {
             .info-wrapper {
               .box {
