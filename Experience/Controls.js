@@ -1,4 +1,4 @@
-import Experience from "../Experience";
+import Experience from "./Experience";
 import GSAP from "gsap";
 import ASScroll from "@ashthornton/asscroll";
 import { ScrollTrigger } from "gsap/ScrollTrigger.js";
@@ -6,22 +6,25 @@ import { ScrollTrigger } from "gsap/ScrollTrigger.js";
 export default class Controls {
   constructor() {
     this.experience = new Experience();
+    this.preloader = this.experience.preloader;
     this.camera = this.experience.camera;
     this.observer = this.experience.observer;
-    this.room = this.experience.world.room.actualRoom;
-    this.roomLight = this.experience.world.room.rectLight;
-    this.circle = this.experience.world.floor.circle;
     this.canvasVisible = false;
     this.firstSection = null;
 
     GSAP.registerPlugin(ScrollTrigger);
 
+    this.preloader.on("enablecontrols", () => {
+      this.room = this.experience.world.room.actualRoom;
+      this.circle = this.experience.world.floor.circle;
+      this.setScrollTrigger();
+      this.setCanvasObserver();
+    });
+
     this.setSmoothScroll();
-    this.setScrollTrigger();
-    this.setCanvasObserver();
   }
 
-  setupASScroll() {
+   setupASScroll() {
     const asscroll = new ASScroll({
       ease: 0.1,
       disableRaf: true,
@@ -56,25 +59,34 @@ export default class Controls {
     ScrollTrigger.addEventListener("refresh", asscroll.resize);
 
     requestAnimationFrame(() => {
-      asscroll.enable({
-        newScrollElements: document.querySelectorAll(
-          ".gsap-marker-start, .gsap-marker-end, [asscroll]"
-        ),
-      });
+      this.asscroll.disable();
     });
+
     return asscroll;
-  }
+  } 
 
   setSmoothScroll() {
     this.asscroll = this.setupASScroll();
   }
 
+  enableScroll() {
+    console.log(this.asscroll)
+
+    requestAnimationFrame(() => {
+      this.asscroll.enable({
+        newScrollElements: document.querySelectorAll(
+          ".gsap-marker-start, .gsap-marker-end, [asscroll]"
+        ),
+      });
+    });
+  }
+
   setScrollTrigger() {
     ScrollTrigger.matchMedia({
       "(min-width: 969px)": () => {
-        this.room.scale.set(0.9, 0.9, 0.9);
-        this.circle.scale.set(0.4, 0.4, 0.4);
-        this.roomLight.intensity = 5;
+        /* this.room.scale.set(0.9, 0.9, 0.9); */
+        /* this.circle.scale.set(0.4, 0.4, 0.4); */ // Certo
+        /* this.circle.scale.set(0, 0, 0); */ // temp
 
         this.firstSection = new GSAP.timeline({
           scrollTrigger: {
@@ -100,7 +112,7 @@ export default class Controls {
 
       "(max-width: 968px)": () => {
         this.room.scale.set(0.65, 0.65, 0.65);
-        this.roomLight.intensity = 2;
+
         if (this.circle) {
           this.circle.scale.set(0, 0, 0);
         }
@@ -119,15 +131,15 @@ export default class Controls {
   setCanvasObserver() {
     this.observer.on("canvasVisible", (visible) => {
       this.canvasVisible = visible;
-      if (this.canvasVisible) {
-        if (this.firstSection) {
-          this.firstSection.scrollTrigger.enable();
-          console.log("aaaaa");
-        }
-      } else {
-        if (this.firstSection) {
-          this.firstSection.scrollTrigger.disable();
-          console.log("bbbb");
+      if (window.innerWidth > 968) {
+        if (this.canvasVisible) {
+          if (this.firstSection) {
+            this.firstSection.scrollTrigger.enable();
+          }
+        } else {
+          if (this.firstSection) {
+            this.firstSection.scrollTrigger.disable();
+          }
         }
       }
     });

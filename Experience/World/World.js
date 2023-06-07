@@ -2,11 +2,13 @@ import Experience from "../Experience";
 
 import Room from "./Room";
 import Floor from "./Floor";
-import Controls from "./Controls";
 import Environment from "./Environment";
 
-export default class World {
+import EventEmitter from "events";
+
+export default class World extends EventEmitter {
   constructor() {
+    super();
     this.experience = new Experience();
     this.resources = this.experience.resources;
     this.compatibility = this.experience.compatibility;
@@ -16,7 +18,8 @@ export default class World {
       this.environment = new Environment();
       this.floor = new Floor();
       this.room = new Room();
-      this.controls = new Controls();
+      this.room.roomMeshes["floorCircle"] = this.floor.circle;
+      this.emit("worldready");
     });
 
     this.theme.on("switch", (theme) => {
@@ -37,9 +40,6 @@ export default class World {
       if (!this.compatibility.isMobileDevice) {
         this.room.update();
       }
-    }
-    if (this.controls) {
-      this.controls.update();
     }
   }
 }

@@ -9,9 +9,11 @@ import assets from "./Utils/assets";
 
 import Camera from "./Camera";
 import Renderer from "./Renderer";
+import Preloader from "./Preloader";
 import Theme from "./Theme";
 
 import World from "./World/World";
+import Controls from "./Controls";
 
 export default class Experience {
   static instance;
@@ -20,6 +22,7 @@ export default class Experience {
       return Experience.instance;
     }
     Experience.instance = this;
+    this.compatibility = new Compatibility();
     this.canvas = canvas;
     this.scene = new THREE.Scene();
     this.observer = new Observer();
@@ -27,10 +30,11 @@ export default class Experience {
     this.sizes = new Sizes();
     this.camera = new Camera();
     this.renderer = new Renderer();
-    this.compatibility = new Compatibility();
     this.resources = new Resources(assets);
     this.theme = new Theme();
     this.world = new World();
+    this.preloader = new Preloader();
+    this.controls = new Controls;
 
     this.time.on("update", () => {
       this.update();

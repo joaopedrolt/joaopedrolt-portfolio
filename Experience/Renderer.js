@@ -8,6 +8,7 @@ export default class Renderer {
     this.scene = this.experience.scene;
     this.canvas = this.experience.canvas;
     this.camera = this.experience.camera;
+    this.compatibility = this.experience.compatibility;
 
     this.setRenderer();
   }
@@ -24,12 +25,20 @@ export default class Renderer {
     this.renderer.shadowMap.enabled = true;
     this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     this.renderer.setSize(this.sizes.width, this.sizes.height);
-    this.renderer.setPixelRatio(this.sizes.pixelRatio);
+    if (!this.compatibility.isMobileDevice) {
+      this.renderer.setPixelRatio(this.sizes.pixelRatio);
+    } else {
+      this.renderer.setPixelRatio(this.sizes.pixelRatio * 0.6);
+    }
   }
 
   resize() {
     this.renderer.setSize(this.sizes.width, this.sizes.height);
-    this.renderer.setPixelRatio(this.sizes.pixelRatio);
+    if (!this.compatibility.isMobileDevice) {
+      this.renderer.setPixelRatio(this.sizes.pixelRatio);
+    } else {
+      this.renderer.setPixelRatio(this.sizes.pixelRatio * 0.6);
+    }
   }
 
   update() {

@@ -8,8 +8,8 @@ export default class Camera {
     this.sizes = this.experience.sizes;
     this.scene = this.experience.scene;
     this.canvas = this.experience.canvas;
-
-    /* this.gui = new dat.GUI(); */
+/* 
+    this.gui = new dat.GUI(); */
 
     /*   this.createPerspectiveCamera(); */
     this.createOrthographicCamera();
@@ -46,11 +46,11 @@ export default class Camera {
     this.orthographicCamera.rotation.x = -Math.PI / 6;
     this.scene.add(this.orthographicCamera);
 
-    /* this.gui.add(this.orthographicCamera.rotation, 'x', -2, 3, 0.1);
+ /*    this.gui.add(this.orthographicCamera.rotation, 'x', -2, 3, 0.1);
         this.gui.add(this.orthographicCamera.rotation, 'y', 0, 5, 0.1);
-        this.gui.add(this.orthographicCamera.rotation, 'z', 0, 5, 0.1); */
+        this.gui.add(this.orthographicCamera.rotation, 'z', 0, 5, 0.1);
 
-    /* this.gui.add(this.orthographicCamera.position, 'x', -2, 3, 0.01);
+    this.gui.add(this.orthographicCamera.position, 'x', -2, 3, 0.01);
         this.gui.add(this.orthographicCamera.position, 'y', 0, 5, 0.1);
         this.gui.add(this.orthographicCamera.position, 'z', 0, 5, 0.1); */
 
