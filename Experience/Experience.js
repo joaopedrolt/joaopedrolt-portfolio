@@ -10,7 +10,6 @@ import assets from "./Utils/assets";
 import Camera from "./Camera";
 import Renderer from "./Renderer";
 import Preloader from "./Preloader";
-import Theme from "./Theme";
 
 import World from "./World/World";
 import Controls from "./Controls";
@@ -31,7 +30,6 @@ export default class Experience {
     this.camera = new Camera();
     this.renderer = new Renderer();
     this.resources = new Resources(assets);
-    this.theme = new Theme();
     this.world = new World();
     this.preloader = new Preloader();
     this.controls = new Controls;
@@ -54,5 +52,6 @@ export default class Experience {
   resize() {
     this.camera.resize();
     this.renderer.resize();
+    this.world.room.resize();
   }
 }

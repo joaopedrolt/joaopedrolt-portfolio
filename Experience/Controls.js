@@ -7,24 +7,30 @@ export default class Controls {
   constructor() {
     this.experience = new Experience();
     this.preloader = this.experience.preloader;
+    this.world = this.experience.world;
     this.camera = this.experience.camera;
     this.observer = this.experience.observer;
     this.canvasVisible = false;
     this.firstSection = null;
+    this.loaded = false;
 
     GSAP.registerPlugin(ScrollTrigger);
 
-    this.preloader.on("enablecontrols", () => {
+    this.world.on("worldready", () => {
       this.room = this.experience.world.room.actualRoom;
       this.circle = this.experience.world.floor.circle;
       this.setScrollTrigger();
-      this.setCanvasObserver();
+    });
+
+    this.preloader.on("enablecontrols", () => {
+      this.loaded = true;
     });
 
     this.setSmoothScroll();
+    this.setCanvasObserver();
   }
 
-   setupASScroll() {
+  setupASScroll() {
     const asscroll = new ASScroll({
       ease: 0.1,
       disableRaf: true,
@@ -63,15 +69,13 @@ export default class Controls {
     });
 
     return asscroll;
-  } 
+  }
 
   setSmoothScroll() {
     this.asscroll = this.setupASScroll();
   }
 
   enableScroll() {
-    console.log(this.asscroll)
-
     requestAnimationFrame(() => {
       this.asscroll.enable({
         newScrollElements: document.querySelectorAll(
@@ -84,9 +88,11 @@ export default class Controls {
   setScrollTrigger() {
     ScrollTrigger.matchMedia({
       "(min-width: 969px)": () => {
-        /* this.room.scale.set(0.9, 0.9, 0.9); */
-        /* this.circle.scale.set(0.4, 0.4, 0.4); */ // Certo
-        /* this.circle.scale.set(0, 0, 0); */ // temp
+        this.room.scale.set(0.9, 0.9, 0.9);
+
+        if (this.loaded) {
+          this.circle.scale.set(0.4, 0.4, 0.4);
+        }
 
         this.firstSection = new GSAP.timeline({
           scrollTrigger: {
@@ -96,8 +102,6 @@ export default class Controls {
             scrub: true,
             /* markers: true, */
             invalidateOnRefresh: true,
-            onEnterBack: ({ progress, direction, isActive }) =>
-              console.log(progress, direction, isActive),
           },
         })
           .to(this.circle.scale, {
@@ -111,7 +115,7 @@ export default class Controls {
       },
 
       "(max-width: 968px)": () => {
-        this.room.scale.set(0.65, 0.65, 0.65);
+        this.room.scale.set(0.6, 0.6, 0.6);
 
         if (this.circle) {
           this.circle.scale.set(0, 0, 0);
@@ -119,7 +123,6 @@ export default class Controls {
       },
 
       "(max-width: 600px)": () => {
-        this.room.scale.set(0.6, 0.6, 0.6);
         this.camera.orthographicCamera.position.y = 3.3;
         this.camera.orthographicCamera.position.x = 0.07;
       },

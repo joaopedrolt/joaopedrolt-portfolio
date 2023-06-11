@@ -10,6 +10,30 @@ export default class Preloader extends EventEmitter {
     this.camera = this.experience.camera;
     this.compatibility = this.experience.compatibility;
     this.world = this.experience.world;
+    this.device = this.compatibility.isMobileDevice;
+    this.lockDeviceChange = true;
+    this.deviceChangedWhilePlaying = false;
+
+    this.compatibility.on("switchdevice", (newDevice) => {
+      if (this.playingIntro) {
+        this.deviceChangedWhilePlaying = true;
+        this.device = newDevice;
+      }
+
+      if (!this.lockDeviceChange) {
+        if (this.device != newDevice) {
+          if (!newDevice) {
+            this.room.position.x = -1;
+            this.room.position.z = 0;
+            this.device = newDevice;
+          } else {
+            this.room.position.x = 0;
+            this.room.position.z = -1;
+            this.device = newDevice;
+          }
+        }
+      }
+    });
 
     this.world.on("worldready", () => {
       this.setAssets();
@@ -21,14 +45,15 @@ export default class Preloader extends EventEmitter {
     this.controls = this.experience.controls;
     this.room = this.world.room.actualRoom;
     this.roomMeshes = this.world.room.roomMeshes;
-    console.log(this.roomMeshes);
   }
 
   firstIntro() {
     return new Promise((resolve) => {
       this.timeline = new GSAP.timeline();
 
-      if (!this.compatibility.isMobileDevice) {
+      this.playingIntro = true;
+
+      if (!this.device) {
         this.timeline
           .to(this.roomMeshes.loadcube.scale, {
             x: 0.1877988576889038,
@@ -106,6 +131,14 @@ export default class Preloader extends EventEmitter {
   thirdIntro() {
     return new Promise((resolve) => {
       this.thirdTimeline = new GSAP.timeline();
+
+      const circleDesktopParams = {
+        x: 0.4,
+        y: 0.4,
+        z: 0.4,
+        ease: "power2.out",
+        duration: 0.5,
+      };
 
       this.thirdTimeline
         .to(
@@ -298,13 +331,13 @@ export default class Preloader extends EventEmitter {
           },
           "chair"
         )
-        .to(this.roomMeshes.floorCircle.scale, {
-          x: 0.4,
-          y: 0.4,
-          z: 0.4,
-          ease: "power2.out",
-          duration: 0.5,
-        }, "chair");
+        .to(
+          this.roomMeshes.floorCircle.scale,
+          !this.compatibility.isMobileDevice
+            ? circleDesktopParams
+            : { x: 0, y: 0, z: 0 },
+          "chair"
+        );
     });
   }
 
@@ -330,7 +363,6 @@ export default class Preloader extends EventEmitter {
     let currentY = e.touches[0].clientY;
     let difference = this.initalY - currentY;
     if (difference > 0) {
-      console.log("swipped up");
       this.removeEventListeners();
       this.playSecondIntro();
     }
@@ -345,6 +377,20 @@ export default class Preloader extends EventEmitter {
 
   async playIntro() {
     await this.firstIntro();
+    this.playingIntro = false;
+
+    if (this.deviceChangedWhilePlaying) {
+      if (!this.device) {
+        this.room.position.x = -1;
+        this.room.position.z = 0;
+      } else {
+        this.room.position.x = 0;
+        this.room.position.z = -1;
+      }
+    }
+
+    this.lockDeviceChange = false;
+
     this.scrollOnceEvent = this.onScroll.bind(this);
     this.touchStart = this.onTouch.bind(this);
     this.touchMove = this.onTouchMove.bind(this);
@@ -354,6 +400,7 @@ export default class Preloader extends EventEmitter {
   }
 
   async playSecondIntro() {
+    this.lockDeviceChange = true;
     await this.secondIntro();
     this.playThirdIntro();
   }

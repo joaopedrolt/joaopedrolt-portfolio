@@ -25,18 +25,15 @@ export default class Floor {
   }
 
   setCircle() {
-    if (!this.compatibility.isMobileDevice) {
-      const geometry = new THREE.CircleGeometry(5, 64);
-      const material = new THREE.MeshStandardMaterial({ color: 0xc5cfa5 });
-      this.circle = new THREE.Mesh(geometry, material);
-      this.circle.position.y = -0.29;
-      this.circle.position.x = 0.07;
-      /* this.circle.scale.set(0.4, 0.4, 0.4); */
-      this.circle.scale.set(0, 0, 0);
-      this.circle.rotation.x = -Math.PI / 2;
-      this.circle.receiveShadow = true;
-      this.scene.add(this.circle);
-    }
+    const geometry = new THREE.CircleGeometry(5, 64);
+    const material = new THREE.MeshStandardMaterial({ color: 0xc5cfa5 });
+    this.circle = new THREE.Mesh(geometry, material);
+    this.circle.position.y = -0.29;
+    this.circle.position.x = 0.07;
+    this.circle.scale.set(0, 0, 0);
+    this.circle.rotation.x = -Math.PI / 2;
+    this.circle.receiveShadow = true;
+    this.scene.add(this.circle);
   }
 
   resize() {}

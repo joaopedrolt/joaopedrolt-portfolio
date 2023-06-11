@@ -12,7 +12,6 @@ export default class World extends EventEmitter {
     this.experience = new Experience();
     this.resources = this.experience.resources;
     this.compatibility = this.experience.compatibility;
-    this.theme = this.experience.theme;
 
     this.resources.on("ready", () => {
       this.environment = new Environment();
@@ -22,15 +21,6 @@ export default class World extends EventEmitter {
       this.emit("worldready");
     });
 
-    this.theme.on("switch", (theme) => {
-      this.switchTheme(theme);
-    });
-  }
-
-  switchTheme(theme) {
-    if (this.environment) {
-      this.environment.switchTheme(theme);
-    }
   }
 
   resize() {}

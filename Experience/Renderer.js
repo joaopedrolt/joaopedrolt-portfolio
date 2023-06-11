@@ -28,7 +28,8 @@ export default class Renderer {
     if (!this.compatibility.isMobileDevice) {
       this.renderer.setPixelRatio(this.sizes.pixelRatio);
     } else {
-      this.renderer.setPixelRatio(this.sizes.pixelRatio * 0.6);
+      /*   this.renderer.setPixelRatio(this.sizes.pixelRatio * 0.6); */
+      this.renderer.setPixelRatio(this.sizes.pixelRatio);
     }
   }
 
@@ -37,7 +38,8 @@ export default class Renderer {
     if (!this.compatibility.isMobileDevice) {
       this.renderer.setPixelRatio(this.sizes.pixelRatio);
     } else {
-      this.renderer.setPixelRatio(this.sizes.pixelRatio * 0.6);
+      /* this.renderer.setPixelRatio(this.sizes.pixelRatio * 0.6); */
+      this.renderer.setPixelRatio(this.sizes.pixelRatio);
     }
   }
 

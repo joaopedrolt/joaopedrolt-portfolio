@@ -1,7 +1,7 @@
 import Experience from "../Experience";
 import * as THREE from "three";
 import GSAP from "gsap";
-/* import { RectAreaLightHelper } from "three/examples/jsm/helpers/RectAreaLightHelper.js";
+/* 
 import * as dat from "dat.gui"; */
 
 export default class Room {
@@ -47,7 +47,12 @@ export default class Room {
       this.roomMeshes[child.name.toLowerCase()] = child;
     });
 
-    this.actualRoom.scale.set(0.9, 0.9, 0.9);
+    if (!this.compatibility.isMobileDevice){
+      this.actualRoom.scale.set(0.9, 0.9, 0.9);
+    } else {
+      this.actualRoom.scale.set(0.6, 0.6, 0.6);
+    }
+
     /* console.log(this.actualRoom.position) */
     this.scene.add(this.actualRoom);
   }
@@ -62,6 +67,12 @@ export default class Room {
 
       this.onMouseMove();
     } else {
+      this.lerp = {
+        current: 0,
+        target: 0,
+        ease: 0.1,
+      };
+      
       this.actualRoom.rotation.y = 0.06;
     }
   }
@@ -74,7 +85,11 @@ export default class Room {
     });
   }
 
-  resize() {}
+  resize() {
+    if (!this.compatibility.isMobileDevice) {
+      this.onMouseMove();
+    }
+  }
 
   update() {
     this.lerp.current = GSAP.utils.interpolate(

@@ -2,7 +2,6 @@ export default class ScrollLock {
   constructor() {
     this.supportsPassive();
     this.page = document.getElementById("page");
-    console.log(this.page)
   }
 
   keys = { 37: 1, 38: 1, 39: 1, 40: 1 };
