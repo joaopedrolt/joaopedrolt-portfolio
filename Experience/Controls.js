@@ -12,7 +12,9 @@ export default class Controls {
     this.observer = this.experience.observer;
     this.canvasVisible = false;
     this.firstSection = null;
-    this.loaded = false;
+    this.scrollLock = this.experience.scrollLock;
+
+    this.scrollLock.disableScroll();
 
     GSAP.registerPlugin(ScrollTrigger);
 
@@ -23,7 +25,8 @@ export default class Controls {
     });
 
     this.preloader.on("enablecontrols", () => {
-      this.loaded = true;
+      this.enableScroll();
+      this.scrollLock.enableScroll();
     });
 
     this.setSmoothScroll();

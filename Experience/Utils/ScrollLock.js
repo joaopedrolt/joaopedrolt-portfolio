@@ -1,7 +1,6 @@
 export default class ScrollLock {
   constructor() {
     this.supportsPassive();
-    this.page = document.getElementById("page");
   }
 
   keys = { 37: 1, 38: 1, 39: 1, 40: 1 };
@@ -36,25 +35,25 @@ export default class ScrollLock {
   }
 
   disableScroll() {
-    this.page.addEventListener("DOMMouseScroll", this.preventDefault, false); // older FF
-    this.page.addEventListener(
+    window.addEventListener("DOMMouseScroll", this.preventDefault, false); // older FF
+    window.addEventListener(
       this.wheelEvent,
       this.preventDefault,
       this.wheelOpt
     ); 
-    this.page.addEventListener("touchmove", this.preventDefault, this.wheelOpt); // mobile
-    this.page.addEventListener("keydown", this.preventDefaultForScrollKeys, false);
+    window.addEventListener("touchmove", this.preventDefault, this.wheelOpt); // mobile
+    window.addEventListener("keydown", this.preventDefaultForScrollKeys, false);
   }
 
   enableScroll() {
-    this.page.removeEventListener("DOMMouseScroll", this.preventDefault, false);
-    this.page.removeEventListener(
+    window.removeEventListener("DOMMouseScroll", this.preventDefault, false);
+    window.removeEventListener(
       this.wheelEvent,
       this.preventDefault,
       this.wheelOpt
     );
-    this.page.removeEventListener("touchmove", this.preventDefault, this.wheelOpt);
-    this.page.removeEventListener(
+    window.removeEventListener("touchmove", this.preventDefault, this.wheelOpt);
+    window.removeEventListener(
       "keydown",
       this.preventDefaultForScrollKeys,
       false

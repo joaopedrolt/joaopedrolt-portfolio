@@ -20,7 +20,6 @@ export default class World extends EventEmitter {
       this.room.roomMeshes["floorCircle"] = this.floor.circle;
       this.emit("worldready");
     });
-
   }
 
   resize() {}

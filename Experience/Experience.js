@@ -6,6 +6,7 @@ import Resources from "./Utils/Resources";
 import Compatibility from "./Utils/Compatibility";
 import Observer from "./Utils/Observer";
 import assets from "./Utils/assets";
+import ScrollLock from "./Utils/ScrollLock";
 
 import Camera from "./Camera";
 import Renderer from "./Renderer";
@@ -22,6 +23,7 @@ export default class Experience {
     }
     Experience.instance = this;
     this.compatibility = new Compatibility();
+    this.scrollLock = new ScrollLock();
     this.canvas = canvas;
     this.scene = new THREE.Scene();
     this.observer = new Observer();

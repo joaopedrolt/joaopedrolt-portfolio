@@ -1,7 +1,7 @@
 import EventEmitter from "events";
 import Experience from "./Experience";
-
 import GSAP from "gsap";
+import convertDiv from "./Utils/divsToSpans";
 
 export default class Preloader extends EventEmitter {
   constructor() {
@@ -42,7 +42,17 @@ export default class Preloader extends EventEmitter {
   }
 
   setAssets() {
-    this.controls = this.experience.controls;
+    convertDiv(document.getElementById("intro"));
+
+    convertDiv(document.getElementById("top-title-top"));
+    convertDiv(document.getElementById("top-title-bottom"));
+
+    convertDiv(document.getElementById("bottom-title-top"));
+    convertDiv(document.getElementById("bottom-title-middle"));
+    convertDiv(document.getElementById("bottom-title-bottom"));
+
+    document.querySelector(".page").style = "";
+
     this.room = this.world.room.actualRoom;
     this.roomMeshes = this.world.room.roomMeshes;
   }
@@ -52,6 +62,14 @@ export default class Preloader extends EventEmitter {
       this.timeline = new GSAP.timeline();
 
       this.playingIntro = true;
+
+      this.timeline.to(".preloader", {
+        opacity: 0,
+        delay: 1,
+        onComplete: () => {
+          document.querySelector(".preloader").classList.add("hidden");
+        },
+      });
 
       if (!this.device) {
         this.timeline
@@ -66,7 +84,6 @@ export default class Preloader extends EventEmitter {
             x: -1,
             ease: "power1.out",
             duration: 0.7,
-            onComplete: resolve,
           });
       } else {
         this.timeline
@@ -84,6 +101,17 @@ export default class Preloader extends EventEmitter {
             onComplete: resolve,
           });
       }
+
+      this.timeline
+        .to(".intro .animatedivs", {
+          yPercent: -100,
+          stagger: 0.05,
+          ease: "back.out(1.7)",
+        })
+        .to(".scroll-down-wrapper", {
+          opacity: 1,
+          onComplete: resolve,
+        });
     });
   }
 
@@ -92,6 +120,14 @@ export default class Preloader extends EventEmitter {
       this.secondTimeline = new GSAP.timeline();
 
       this.secondTimeline
+        .to(".intro .animatedivs", {
+          yPercent: 100,
+          stagger: 0.05,
+          ease: "back.in(1.7)",
+        })
+        .to(".scroll-down-wrapper", {
+          opacity: 0,
+        })
         .to(
           this.room.position,
           {
@@ -327,7 +363,6 @@ export default class Preloader extends EventEmitter {
           {
             z: 6.56 * Math.PI + Math.PI / 5,
             ease: "power2.out",
-            onComplete: resolve,
           },
           "chair"
         )
@@ -337,7 +372,66 @@ export default class Preloader extends EventEmitter {
             ? circleDesktopParams
             : { x: 0, y: 0, z: 0 },
           "chair"
-        );
+        )
+        .to(
+          "#bottom-title-top .animatedivs",
+          {
+            yPercent: -100,
+            stagger: 0.05,
+            ease: "back.out(1.7)",
+          },
+          "title"
+        )
+        .to(
+          "#bottom-title-middle .animatedivs",
+          {
+            yPercent: -100,
+            stagger: 0.05,
+            ease: "back.out(1.7)",
+          },
+          "title"
+        )
+        .to(
+          "#bottom-title-bottom .animatedivs",
+          {
+            yPercent: -100,
+            stagger: 0.05,
+            ease: "back.out(1.7)",
+          },
+          "title"
+        )
+        .to(
+          "#top-title-top .animatedivs",
+          {
+            yPercent: -100,
+            stagger: 0.05,
+            ease: "back.out(1.7)",
+          },
+          "title"
+        )
+        .to(
+          "#top-title-bottom .animatedivs",
+          {
+            yPercent: -100,
+            stagger: 0.05,
+            ease: "back.out(1.7)",
+          },
+          "title"
+        )
+        .to(
+          "#top-title-bottom .animatedivs",
+          {
+            yPercent: -100,
+            stagger: 0.05,
+            ease: "back.out(1.7)",
+          },
+          "title"
+        )
+        .to(".scroll-down-wrapper", {
+          opacity: 1,
+          duration: 0.5,
+          onComplete: resolve,
+        });
     });
   }
 
@@ -407,7 +501,6 @@ export default class Preloader extends EventEmitter {
 
   async playThirdIntro() {
     await this.thirdIntro();
-    this.controls.enableScroll();
     this.emit("enablecontrols");
   }
 

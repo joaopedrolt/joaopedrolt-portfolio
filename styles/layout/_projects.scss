@@ -135,6 +135,7 @@
         height: 100%;
         width: 100%;
         background: var(--color-text);
+        filter: brightness(55%) saturate(120%);
         opacity: 0;
         z-index: 1;
         transition: opacity 0.2s linear;
