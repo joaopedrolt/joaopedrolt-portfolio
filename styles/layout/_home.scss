@@ -35,7 +35,6 @@
         top: calc(50% - 120px);
         width: 100%;
         display: flex;
-
         flex-direction: column;
         align-items: end;
 
@@ -81,7 +80,7 @@
         .scroll-down-icon {
           width: 30px;
           height: 55px;
-          border: 2px solid var(--color-text);
+          border: 1.7px solid var(--color-text);
           border-radius: 60px;
           position: relative;
 
@@ -109,16 +108,30 @@
         }
       }
 
+      @media (max-width: $tablet) {
+        .top-title {
+          top: 13% !important;
+        }
+
+        .bottom-title {
+          bottom: 20% !important;
+        }
+      }
+
       @media (max-width: $mobile) {
         .top-title {
           justify-content: center !important;
-          text-align: center !important;
-          top: 17% !important;
+          top: 9% !important;
+          align-items: center;
+
+          .title-wrapper {
+            text-align: center !important;
+          }
         }
 
         .bottom-title {
           text-align: center !important;
-          bottom: 15% !important;
+          bottom: 17% !important;
         }
 
         .scroll-down-wrapper {

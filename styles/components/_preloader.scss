@@ -55,21 +55,24 @@
 }
 
 .intro {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: absolute;
   top: 44.6%;
-  left: 50%;
+  left: 51.5%;
   transform: translate(-50%, -50%);
   font-weight: 500;
   font-size: 16px;
   color: var(--color-text);
+
+  @media (max-width: $tablet) {
+    top: 50% !important;
+    left: 50% !important;
+  }
 }
 
 .animatedivs {
   display: inline-block;
-  transform: translateY(100%);
+  transform: translateY(200%);
 }
-
-/* .page{
-    opacity: 0;
-    visibility: hidden;
-} */

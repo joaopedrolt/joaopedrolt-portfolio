@@ -5,7 +5,7 @@ export default class Sizes extends EventEmitter {
   constructor() {
     super();
     this.experience = new Experience();
-    this.compability = this.experience.compatibility;
+    this.compatibility = this.experience.compatibility;
     this.width = window.innerWidth;
     this.height = window.innerHeight;
     this.aspect = this.width / this.height;
@@ -14,13 +14,23 @@ export default class Sizes extends EventEmitter {
 
     window.addEventListener("resize", () => {
       this.width = window.innerWidth;
-      if (!this.compability.isMobileDevice) {
+
+      if (this.compatibility.isMobileDevice) {
+        if (this.width > this.height) {
+          this.height = window.innerHeight;
+        }
+        if (window.innerWidth > window.innerHeight) {
+          this.height = window.innerHeight;
+        }
+        if (this.compatibility.probablyDesktop) {
+          this.height = window.innerHeight;
+        }
+      } else {
         this.height = window.innerHeight;
       }
+
       this.aspect = this.width / this.height;
       this.pixelRatio = Math.min(window.devicePixelRatio, 2);
-
-      this.compability.resize();
 
       this.emit("resize");
     });

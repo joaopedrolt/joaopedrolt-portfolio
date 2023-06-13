@@ -6,11 +6,21 @@ export default class Compatibility extends EventEmitter {
     this.userAgent = navigator.userAgent;
     this.regexp = /android|iphone|kindle|ipad/i;
 
-    this.checkUserAgent();
+    if (window.innerWidth > 1100) {
+      this.probablyDesktop = true;
+    } else {
+      this.probablyDesktop = false;
+    }
+
+    window.onbeforeunload = () => {
+      window.scrollTo(0, 0);
+    };
+
+    this.checkDevice();
   }
 
-  checkUserAgent() {
-    if (this.regexp.test(this.userAgent) || window.innerWidth <= 968) {
+  checkDevice() {
+    if (window.innerWidth <= 968) {
       this.isMobileDevice = true;
     } else {
       this.isMobileDevice = false;
@@ -18,26 +28,30 @@ export default class Compatibility extends EventEmitter {
   }
 
   resize() {
-    if (
-      (this.regexp.test(this.userAgent) || window.innerWidth <= 968) &&
-      this.isMobileDevice == false
-    ) {
+    if (window.innerWidth <= 968 && !this.isMobileDevice) {
       this.isMobileDevice = true;
       this.emit("switchdevice", this.isMobileDevice);
-    } else if (
-      !(this.regexp.test(this.userAgent) || window.innerWidth <= 968) &&
-      this.isMobileDevice == true
-    ) {
+    } else if (!(window.innerWidth <= 968) && this.isMobileDevice) {
+      this.isMobileDevice = false;
+      this.emit("switchdevice", this.isMobileDevice);
+    }
+
+    /*  if (window.innerWidth <= 968 && this.isMobileDevice == false) {
+      this.isMobileDevice = true;
+      this.emit("switchdevice", this.isMobileDevice);
+    } else if (!(window.innerWidth <= 968) && this.isMobileDevice == true) {
       this.isMobileDevice = false;
       this.emit("switchdevice", this.isMobileDevice);
     }
 
     if (this.width <= 968 && this.isMobileDevice !== false) {
-      this.device = "mobile";
+      console.log("mudou");
+      this.device = true;
       this.emit("switchdevice", this.device);
     } else if (this.width > 968 && this.isMobileDevice !== true) {
-      this.device = "desktop";
+      console.log("mudou");
+      this.device = false;
       this.emit("switchdevice", this.device);
-    }
+    } */
   }
 }

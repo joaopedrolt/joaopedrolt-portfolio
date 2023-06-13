@@ -23,12 +23,10 @@ export default class Preloader extends EventEmitter {
       if (!this.lockDeviceChange) {
         if (this.device != newDevice) {
           if (!newDevice) {
-            this.room.position.x = -1;
-            this.room.position.z = 0;
+            this.room.position.set(-1, 0, 0);
             this.device = newDevice;
           } else {
-            this.room.position.x = 0;
-            this.room.position.z = -1;
+            this.room.position.set(-0.05, 0, -1);
             this.device = newDevice;
           }
         }
@@ -51,7 +49,7 @@ export default class Preloader extends EventEmitter {
     convertDiv(document.getElementById("bottom-title-middle"));
     convertDiv(document.getElementById("bottom-title-bottom"));
 
-    document.querySelector(".page").style = "";
+    document.querySelector(".page-wrapper").style = "";
 
     this.room = this.world.room.actualRoom;
     this.roomMeshes = this.world.room.roomMeshes;
@@ -62,6 +60,7 @@ export default class Preloader extends EventEmitter {
       this.timeline = new GSAP.timeline();
 
       this.playingIntro = true;
+      this.timeline.set(".animatedivs", { y: 0, yPercent: 200 });
 
       this.timeline.to(".preloader", {
         opacity: 0,
@@ -81,30 +80,33 @@ export default class Preloader extends EventEmitter {
             duration: 0.7,
           })
           .to(this.room.position, {
-            x: -1,
+            x: -1.07,
             ease: "power1.out",
             duration: 0.7,
           });
       } else {
         this.timeline
+          .to(this.room.position, {
+            x: -0.05,
+            duration: 0.1,
+          })
           .to(this.roomMeshes.loadcube.scale, {
-            x: 0.1877988576889038,
-            y: 0.1877988576889038,
-            z: 0.1877988576889038,
+            x: 0.2,
+            y: 0.2,
+            z: 0.2,
             ease: "back.out(2.5)",
             duration: 0.7,
           })
           .to(this.room.position, {
-            z: -1,
+            z: -1.07,
             ease: "power1.out",
             duration: 0.7,
-            onComplete: resolve,
           });
       }
 
       this.timeline
         .to(".intro .animatedivs", {
-          yPercent: -100,
+          yPercent: 0,
           stagger: 0.05,
           ease: "back.out(1.7)",
         })
@@ -119,48 +121,101 @@ export default class Preloader extends EventEmitter {
     return new Promise((resolve) => {
       this.secondTimeline = new GSAP.timeline();
 
-      this.secondTimeline
-        .to(".intro .animatedivs", {
-          yPercent: 100,
-          stagger: 0.05,
-          ease: "back.in(1.7)",
-        })
-        .to(".scroll-down-wrapper", {
-          opacity: 0,
-        })
-        .to(
-          this.room.position,
-          {
-            y: 0,
+      if (!this.device) {
+        this.secondTimeline
+          .to(".intro .animatedivs", {
+            yPercent: 200,
+            stagger: 0.05,
+            ease: "back.in(1.7)",
+          })
+          .to(".scroll-down-wrapper", {
+            opacity: 0,
+          })
+          .to(
+            this.room.position,
+            {
+              y: 0,
+              x: 0,
+              z: 0,
+              ease: "power1.out",
+            },
+            "same"
+          )
+          .to(
+            this.roomMeshes.loadcube.rotation,
+            {
+              y: 2.015 * Math.PI + Math.PI / 4,
+            },
+            "same"
+          )
+          .to(
+            this.roomMeshes.loadcube.scale,
+            {
+              x: 1.07592,
+              y: 1.07592,
+              z: 1.07592,
+            },
+            "same"
+          )
+          .to(this.roomMeshes.loadcube.scale, {
             x: 0,
+            y: 0,
             z: 0,
-            ease: "power1.out",
-          },
-          "same"
-        )
-        .to(
-          this.roomMeshes.loadcube.rotation,
-          {
-            y: 2.015 * Math.PI + Math.PI / 4,
-          },
-          "same"
-        )
-        .to(
-          this.roomMeshes.loadcube.scale,
-          {
-            x: 1.07592,
-            y: 1.07592,
-            z: 1.07592,
-          },
-          "same"
-        )
-        .to(this.roomMeshes.loadcube.scale, {
-          x: 0,
-          y: 0,
-          z: 0,
-          delay: 0.6,
-          onComplete: resolve,
-        });
+            delay: 0.6,
+            onComplete: resolve,
+          });
+      } else {
+        this.secondTimeline
+          .to(".intro .animatedivs", {
+            yPercent: 100,
+            stagger: 0.05,
+            ease: "back.in(1.7)",
+          })
+          .to(".scroll-down-wrapper", {
+            opacity: 0,
+          })
+          .to(
+            this.camera.orthographicCamera.position,
+            {
+              y: 3.05,
+              x: 0.07,
+            },
+            "same"
+          )
+          .to(
+            this.room.position,
+            {
+              y: 0,
+              x: 0,
+              z: 0,
+              ease: "power1.out",
+            },
+            "same"
+          )
+          .to(
+            this.roomMeshes.loadcube.rotation,
+            {
+              y: 2.015 * Math.PI + Math.PI / 4,
+            },
+            "same"
+          )
+          .to(
+            this.roomMeshes.loadcube.scale,
+            {
+              x: 1.07592,
+              y: 1.07592,
+              z: 1.07592,
+            },
+            "same"
+          )
+          .to(this.roomMeshes.loadcube.scale, {
+            x: 0,
+            y: 0,
+            z: 0,
+            delay: 0.6,
+            onComplete: resolve,
+          });
+      }
     });
   }
 
@@ -376,7 +431,7 @@ export default class Preloader extends EventEmitter {
         .to(
           "#bottom-title-top .animatedivs",
           {
-            yPercent: -100,
+            yPercent: 0,
             stagger: 0.05,
             ease: "back.out(1.7)",
           },
@@ -385,7 +440,7 @@ export default class Preloader extends EventEmitter {
         .to(
           "#bottom-title-middle .animatedivs",
           {
-            yPercent: -100,
+            yPercent: 0,
             stagger: 0.05,
             ease: "back.out(1.7)",
           },
@@ -394,7 +449,7 @@ export default class Preloader extends EventEmitter {
         .to(
           "#bottom-title-bottom .animatedivs",
           {
-            yPercent: -100,
+            yPercent: 0,
             stagger: 0.05,
             ease: "back.out(1.7)",
           },
@@ -403,7 +458,7 @@ export default class Preloader extends EventEmitter {
         .to(
           "#top-title-top .animatedivs",
           {
-            yPercent: -100,
+            yPercent: 0,
             stagger: 0.05,
             ease: "back.out(1.7)",
           },
@@ -412,7 +467,7 @@ export default class Preloader extends EventEmitter {
         .to(
           "#top-title-bottom .animatedivs",
           {
-            yPercent: -100,
+            yPercent: 0,
             stagger: 0.05,
             ease: "back.out(1.7)",
           },
@@ -421,7 +476,7 @@ export default class Preloader extends EventEmitter {
         .to(
           "#top-title-bottom .animatedivs",
           {
-            yPercent: -100,
+            yPercent: 0,
             stagger: 0.05,
             ease: "back.out(1.7)",
           },
@@ -463,6 +518,13 @@ export default class Preloader extends EventEmitter {
     this.intialY = null;
   }
 
+  onClick(e) {
+    if(e.target){
+      this.removeEventListeners();
+      this.playSecondIntro();
+    }
+  }
+
   removeEventListeners() {
     window.removeEventListener("wheel", this.scrollOnceEvent);
     window.removeEventListener("touchstart", this.touchStart);
@@ -488,9 +550,11 @@ export default class Preloader extends EventEmitter {
     this.scrollOnceEvent = this.onScroll.bind(this);
     this.touchStart = this.onTouch.bind(this);
     this.touchMove = this.onTouchMove.bind(this);
+    this.click = this.onClick.bind(this);
     window.addEventListener("wheel", this.scrollOnceEvent);
     window.addEventListener("touchstart", this.touchStart);
     window.addEventListener("touchmove", this.touchMove);
+    window.addEventListener("click", this.click);
   }
 
   async playSecondIntro() {

@@ -13,6 +13,7 @@ export default class Controls {
     this.canvasVisible = false;
     this.firstSection = null;
     this.scrollLock = this.experience.scrollLock;
+    this.loaded = false;
 
     this.scrollLock.disableScroll();
 
@@ -27,6 +28,7 @@ export default class Controls {
     this.preloader.on("enablecontrols", () => {
       this.enableScroll();
       this.scrollLock.enableScroll();
+      this.loaded = true;
     });
 
     this.setSmoothScroll();
@@ -126,8 +128,10 @@ export default class Controls {
       },
 
       "(max-width: 600px)": () => {
-        this.camera.orthographicCamera.position.y = 3.3;
-        this.camera.orthographicCamera.position.x = 0.07;
+        if (this.loaded) {
+          this.camera.orthographicCamera.position.y = 3.05;
+          this.camera.orthographicCamera.position.x = 0.07;
+        }
       },
 
       all: () => {},

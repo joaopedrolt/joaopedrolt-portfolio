@@ -34,7 +34,7 @@ export default class Experience {
     this.resources = new Resources(assets);
     this.world = new World();
     this.preloader = new Preloader();
-    this.controls = new Controls;
+    this.controls = new Controls();
 
     this.time.on("update", () => {
       this.update();
@@ -52,6 +52,7 @@ export default class Experience {
   }
 
   resize() {
+    this.compatibility.resize();
     this.camera.resize();
     this.renderer.resize();
     this.world.room.resize();
