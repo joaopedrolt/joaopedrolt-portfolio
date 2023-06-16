@@ -78,21 +78,21 @@
         opacity: 0;
 
         .scroll-down-icon {
-          width: 30px;
-          height: 55px;
-          border: 1.7px solid var(--color-text);
+          width: 25px;
+          height: 50px;
+          border: 1.5px solid var(--color-text-fade);
           border-radius: 60px;
           position: relative;
 
           &::before {
             content: "";
-            width: 8px;
-            height: 8px;
+            width: 7px;
+            height: 7px;
             position: absolute;
             bottom: 7px;
             left: 50%;
             transform: translateX(-50%);
-            background-color: var(--color-text);
+            background-color: var(--color-text-fade);
             border-radius: 50%;
             opacity: 1;
             animation: wheel 2s infinite;
@@ -101,8 +101,16 @@
 
           @media (max-width: $small) {
             & {
-              width: 28px !important;
-              height: 50px !important;
+              border: 1.5px solid var(--color-text-fade);
+              width: 20px !important;
+              height: 40px !important;
+
+              &::before {
+                content: "";
+                width: 5px;
+                height: 5px;
+                animation: wheel-mobile 2s infinite;
+              }
             }
           }
         }
@@ -145,6 +153,13 @@
 @keyframes wheel {
   to {
     opacity: 0;
-    bottom: 32.7px;
+    bottom: 32px;
+  }
+}
+
+@keyframes wheel-mobile {
+  to {
+    opacity: 0;
+    bottom: 25px;
   }
 }

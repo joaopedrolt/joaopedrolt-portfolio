@@ -7,12 +7,16 @@ export default class Preloader extends EventEmitter {
   constructor() {
     super();
     this.experience = new Experience();
+    this.time = this.experience.time;
+    this.alert = this.experience.alert;
+    this.alertShown = false;
     this.camera = this.experience.camera;
     this.compatibility = this.experience.compatibility;
     this.world = this.experience.world;
     this.device = this.compatibility.isMobileDevice;
     this.lockDeviceChange = true;
     this.deviceChangedWhilePlaying = false;
+    this.killTimelines = false;
 
     this.compatibility.on("switchdevice", (newDevice) => {
       if (this.playingIntro) {
@@ -36,6 +40,21 @@ export default class Preloader extends EventEmitter {
     this.world.on("worldready", () => {
       this.setAssets();
       this.playIntro();
+    });
+
+    this.time.on("lowperformance", () => {
+      this.lowPerformance = true;
+
+      if (!this.alertShown) {
+        this.alert.showAlert();
+        this.alertShown = true;
+      }
+
+      this.removeEventListeners();
+    });
+
+    this.alert.on("safeButton", () => {
+      this.handleSafeButton();
     });
   }
 
@@ -70,50 +89,54 @@ export default class Preloader extends EventEmitter {
         },
       });
 
-      if (!this.device) {
+      if (!this.killTimelines) {
+        if (!this.device) {
+          this.timeline
+            .to(this.roomMeshes.loadcube.scale, {
+              x: 0.1877988576889038,
+              y: 0.1877988576889038,
+              z: 0.1877988576889038,
+              ease: "back.out(2.5)",
+              duration: 0.7,
+            })
+            .to(this.room.position, {
+              x: -1.07,
+              ease: "power1.out",
+              duration: 0.7,
+            });
+        } else {
+          this.timeline
+            .to(this.room.position, {
+              x: -0.05,
+              duration: 0.1,
+            })
+            .to(this.roomMeshes.loadcube.scale, {
+              x: 0.2,
+              y: 0.2,
+              z: 0.2,
+              ease: "back.out(2.5)",
+              duration: 0.7,
+            })
+            .to(this.room.position, {
+              z: -1.07,
+              ease: "power1.out",
+              duration: 0.7,
+            });
+        }
+
         this.timeline
-          .to(this.roomMeshes.loadcube.scale, {
-            x: 0.1877988576889038,
-            y: 0.1877988576889038,
-            z: 0.1877988576889038,
-            ease: "back.out(2.5)",
-            duration: 0.7,
+          .to(".intro .animatedivs", {
+            yPercent: 0,
+            stagger: 0.05,
+            ease: "back.out(1.7)",
           })
-          .to(this.room.position, {
-            x: -1.07,
-            ease: "power1.out",
-            duration: 0.7,
+          .to(".scroll-down-wrapper", {
+            opacity: 1,
+            onComplete: resolve,
           });
       } else {
-        this.timeline
-          .to(this.room.position, {
-            x: -0.05,
-            duration: 0.1,
-          })
-          .to(this.roomMeshes.loadcube.scale, {
-            x: 0.2,
-            y: 0.2,
-            z: 0.2,
-            ease: "back.out(2.5)",
-            duration: 0.7,
-          })
-          .to(this.room.position, {
-            z: -1.07,
-            ease: "power1.out",
-            duration: 0.7,
-          });
+        resolve();
       }
-
-      this.timeline
-        .to(".intro .animatedivs", {
-          yPercent: 0,
-          stagger: 0.05,
-          ease: "back.out(1.7)",
-        })
-        .to(".scroll-down-wrapper", {
-          opacity: 1,
-          onComplete: resolve,
-        });
     });
   }
 
@@ -121,100 +144,112 @@ export default class Preloader extends EventEmitter {
     return new Promise((resolve) => {
       this.secondTimeline = new GSAP.timeline();
 
-      if (!this.device) {
-        this.secondTimeline
-          .to(".intro .animatedivs", {
-            yPercent: 200,
-            stagger: 0.05,
-            ease: "back.in(1.7)",
-          })
-          .to(".scroll-down-wrapper", {
-            opacity: 0,
-          })
-          .to(
-            this.room.position,
-            {
-              y: 0,
+      if (!this.killTimelines) {
+        if (!this.device) {
+          this.secondTimeline
+            .to(".intro .animatedivs", {
+              yPercent: 200,
+              stagger: 0.05,
+              ease: "back.in(1.7)",
+            })
+            .to(".scroll-down-wrapper", {
+              opacity: 0,
+            })
+            .to(
+              this.camera.orthographicCamera.position,
+              {
+                y: 3.2,
+                z: 5,
+              },
+              "same"
+            )
+            .to(
+              this.room.position,
+              {
+                y: 0,
+                x: 0,
+                z: 0,
+                ease: "power1.out",
+              },
+              "same"
+            )
+            .to(
+              this.roomMeshes.loadcube.rotation,
+              {
+                y: 2.015 * Math.PI + Math.PI / 4,
+              },
+              "same"
+            )
+            .to(
+              this.roomMeshes.loadcube.scale,
+              {
+                x: 1.07592,
+                y: 1.07592,
+                z: 1.07592,
+              },
+              "same"
+            )
+            .to(this.roomMeshes.loadcube.scale, {
               x: 0,
+              y: 0,
               z: 0,
-              ease: "power1.out",
-            },
-            "same"
-          )
-          .to(
-            this.roomMeshes.loadcube.rotation,
-            {
-              y: 2.015 * Math.PI + Math.PI / 4,
-            },
-            "same"
-          )
-          .to(
-            this.roomMeshes.loadcube.scale,
-            {
-              x: 1.07592,
-              y: 1.07592,
-              z: 1.07592,
-            },
-            "same"
-          )
-          .to(this.roomMeshes.loadcube.scale, {
-            x: 0,
-            y: 0,
-            z: 0,
-            delay: 0.6,
-            onComplete: resolve,
-          });
+              delay: 0.6,
+              onComplete: resolve,
+            });
+        } else {
+          this.secondTimeline
+            .to(".intro .animatedivs", {
+              yPercent: 100,
+              stagger: 0.05,
+              ease: "back.in(1.7)",
+            })
+            .to(".scroll-down-wrapper", {
+              opacity: 0,
+            })
+            .to(
+              this.camera.orthographicCamera.position,
+              {
+                y: 3.05,
+                x: 0.07,
+              },
+              "same"
+            )
+            .to(
+              this.room.position,
+              {
+                y: 0,
+                x: 0,
+                z: 0,
+                ease: "power1.out",
+              },
+              "same"
+            )
+            .to(
+              this.roomMeshes.loadcube.rotation,
+              {
+                y: 2.015 * Math.PI + Math.PI / 4,
+              },
+              "same"
+            )
+            .to(
+              this.roomMeshes.loadcube.scale,
+              {
+                x: 1.07592,
+                y: 1.07592,
+                z: 1.07592,
+              },
+              "same"
+            )
+            .to(this.roomMeshes.loadcube.scale, {
+              x: 0,
+              y: 0,
+              z: 0,
+              delay: 0.6,
+              onComplete: resolve,
+            });
+        }
       } else {
-        this.secondTimeline
-          .to(".intro .animatedivs", {
-            yPercent: 100,
-            stagger: 0.05,
-            ease: "back.in(1.7)",
-          })
-          .to(".scroll-down-wrapper", {
-            opacity: 0,
-          })
-          .to(
-            this.camera.orthographicCamera.position,
-            {
-              y: 3.05,
-              x: 0.07,
-            },
-            "same"
-          )
-          .to(
-            this.room.position,
-            {
-              y: 0,
-              x: 0,
-              z: 0,
-              ease: "power1.out",
-            },
-            "same"
-          )
-          .to(
-            this.roomMeshes.loadcube.rotation,
-            {
-              y: 2.015 * Math.PI + Math.PI / 4,
-            },
-            "same"
-          )
-          .to(
-            this.roomMeshes.loadcube.scale,
-            {
-              x: 1.07592,
-              y: 1.07592,
-              z: 1.07592,
-            },
-            "same"
-          )
-          .to(this.roomMeshes.loadcube.scale, {
-            x: 0,
-            y: 0,
-            z: 0,
-            delay: 0.6,
-            onComplete: resolve,
-          });
+        resolve();
       }
     });
   }
@@ -231,262 +266,266 @@ export default class Preloader extends EventEmitter {
         duration: 0.5,
       };
 
-      this.thirdTimeline
-        .to(
-          this.roomMeshes.room.scale,
-          {
+      if (!this.killTimelines) {
+        this.thirdTimeline
+          .to(
+            this.roomMeshes.room.scale,
+            {
+              x: 1,
+              y: 1,
+              z: 1,
+              duration: 0.4,
+              ease: "back.out(1.0)",
+            },
+            "same"
+          )
+          .to(this.roomMeshes.bed.scale, {
             x: 1,
             y: 1,
             z: 1,
             duration: 0.4,
             ease: "back.out(1.0)",
-          },
-          "same"
-        )
-        .to(this.roomMeshes.bed.scale, {
-          x: 1,
-          y: 1,
-          z: 1,
-          duration: 0.4,
-          ease: "back.out(1.0)",
-        })
-        .to(this.roomMeshes.desk.scale, {
-          x: 1,
-          y: 1,
-          z: 1,
-          duration: 0.4,
-          ease: "back.out(1.0)",
-        })
-        .to(this.roomMeshes.wardrobe.scale, {
-          x: 1,
-          y: 1,
-          z: 1,
-          duration: 0.4,
-          ease: "back.out(1.0)",
-        })
-        .to(this.roomMeshes.shelf.scale, {
-          x: 1,
-          y: 1,
-          z: 1,
-          duration: 0.4,
-          ease: "back.out(1.0)",
-        })
-        .to(
-          this.roomMeshes.coffee.scale,
-          {
+          })
+          .to(this.roomMeshes.desk.scale, {
             x: 1,
             y: 1,
             z: 1,
-            duration: 0.26,
-            ease: "back.out(2.2)",
-          },
-          "coffee"
-        )
-        .to(
-          this.roomMeshes.bottle.scale,
-          {
-            x: 1,
-            y: 1,
-            z: 1,
-            duration: 0.26,
-            ease: "back.out(2.2)",
-          },
-          "coffee"
-        )
-        .to(
-          this.roomMeshes.body.scale,
-          {
-            x: 1,
-            y: 1,
-            z: 1,
-            duration: 0.26,
-            ease: "back.out(2.2)",
-          },
-          "mouse"
-        )
-        .to(
-          this.roomMeshes.mouse.scale,
-          {
-            x: 1,
-            y: 1,
-            z: 1,
-            duration: 0.26,
-            ease: "back.out(2.2)",
-          },
-          "mouse"
-        )
-        .to(this.roomMeshes.desktop.scale, {
-          x: 1,
-          y: 1,
-          z: 1,
-          duration: 0.26,
-          ease: "back.out(2.2)",
-        })
-        .to(this.roomMeshes.screen.scale, {
-          x: 1,
-          y: 1,
-          z: 1,
-          duration: 0.26,
-          ease: "back.out(2.2)",
-        })
-        .to(
-          this.roomMeshes.fio.scale,
-          {
-            x: 1,
-            y: 1,
-            z: 1,
-            duration: 0.26,
-            ease: "back.out(2.2)",
-          },
-          "phone"
-        )
-        .to(
-          this.roomMeshes.phone.scale,
-          {
-            x: 1,
-            y: 1,
-            z: 1,
-            duration: 0.26,
-            ease: "back.out(2.2)",
-          },
-          "phone"
-        )
-        .to(
-          this.roomMeshes.book.scale,
-          {
-            x: 1,
-            y: 1,
-            z: 1,
-            duration: 0.26,
-            ease: "back.out(2.2)",
-          },
-          "access2"
-        )
-        .to(
-          this.roomMeshes.torus.scale,
-          {
-            x: 1,
-            y: 1,
-            z: 1,
-            duration: 0.26,
-            ease: "back.out(2.2)",
-          },
-          "access1"
-        )
-        .to(
-          this.roomMeshes.bota1.scale,
-          {
-            x: 1,
-            y: 1,
-            z: 1,
-            duration: 0.26,
-            ease: "back.out(2.2)",
-          },
-          "access2"
-        )
-        .to(
-          this.roomMeshes.cap.scale,
-          {
-            x: 1,
-            y: 1,
-            z: 1,
-            duration: 0.26,
-            ease: "back.out(2.2)",
-          },
-          "access1"
-        )
-        .to(this.roomMeshes.chairbase.scale, {
-          x: 1,
-          y: 1,
-          z: 1,
-          duration: 0.26,
-          ease: "back.out(2.2)",
-        })
-        .to(
-          this.roomMeshes.chair.scale,
-          {
-            x: 1,
-            y: 1,
-            z: 1,
-            duration: 1,
+            duration: 0.4,
             ease: "back.out(1.0)",
-          },
-          "chair"
-        )
-        .to(
-          this.roomMeshes.chair.rotation,
-          {
-            z: 6.56 * Math.PI + Math.PI / 5,
-            ease: "power2.out",
-          },
-          "chair"
-        )
-        .to(
-          this.roomMeshes.floorCircle.scale,
-          !this.compatibility.isMobileDevice
-            ? circleDesktopParams
-            : { x: 0, y: 0, z: 0 },
-          "chair"
-        )
-        .to(
-          "#bottom-title-top .animatedivs",
-          {
-            yPercent: 0,
-            stagger: 0.05,
-            ease: "back.out(1.7)",
-          },
-          "title"
-        )
-        .to(
-          "#bottom-title-middle .animatedivs",
-          {
-            yPercent: 0,
-            stagger: 0.05,
-            ease: "back.out(1.7)",
-          },
-          "title"
-        )
-        .to(
-          "#bottom-title-bottom .animatedivs",
-          {
-            yPercent: 0,
-            stagger: 0.05,
-            ease: "back.out(1.7)",
-          },
-          "title"
-        )
-        .to(
-          "#top-title-top .animatedivs",
-          {
-            yPercent: 0,
-            stagger: 0.05,
-            ease: "back.out(1.7)",
-          },
-          "title"
-        )
-        .to(
-          "#top-title-bottom .animatedivs",
-          {
-            yPercent: 0,
-            stagger: 0.05,
-            ease: "back.out(1.7)",
-          },
-          "title"
-        )
-        .to(
-          "#top-title-bottom .animatedivs",
-          {
-            yPercent: 0,
-            stagger: 0.05,
-            ease: "back.out(1.7)",
-          },
-          "title"
-        )
-        .to(".scroll-down-wrapper", {
-          opacity: 1,
-          duration: 0.5,
-          onComplete: resolve,
-        });
+          })
+          .to(this.roomMeshes.wardrobe.scale, {
+            x: 1,
+            y: 1,
+            z: 1,
+            duration: 0.4,
+            ease: "back.out(1.0)",
+          })
+          .to(this.roomMeshes.shelf.scale, {
+            x: 1,
+            y: 1,
+            z: 1,
+            duration: 0.4,
+            ease: "back.out(1.0)",
+          })
+          .to(
+            this.roomMeshes.coffee.scale,
+            {
+              x: 1,
+              y: 1,
+              z: 1,
+              duration: 0.26,
+              ease: "back.out(2.2)",
+            },
+            "coffee"
+          )
+          .to(
+            this.roomMeshes.bottle.scale,
+            {
+              x: 1,
+              y: 1,
+              z: 1,
+              duration: 0.26,
+              ease: "back.out(2.2)",
+            },
+            "coffee"
+          )
+          .to(
+            this.roomMeshes.body.scale,
+            {
+              x: 1,
+              y: 1,
+              z: 1,
+              duration: 0.26,
+              ease: "back.out(2.2)",
+            },
+            "mouse"
+          )
+          .to(
+            this.roomMeshes.mouse.scale,
+            {
+              x: 1,
+              y: 1,
+              z: 1,
+              duration: 0.26,
+              ease: "back.out(2.2)",
+            },
+            "mouse"
+          )
+          .to(this.roomMeshes.desktop.scale, {
+            x: 1,
+            y: 1,
+            z: 1,
+            duration: 0.26,
+            ease: "back.out(2.2)",
+          })
+          .to(this.roomMeshes.screen.scale, {
+            x: 1,
+            y: 1,
+            z: 1,
+            duration: 0.26,
+            ease: "back.out(2.2)",
+          })
+          .to(
+            this.roomMeshes.fio.scale,
+            {
+              x: 1,
+              y: 1,
+              z: 1,
+              duration: 0.26,
+              ease: "back.out(2.2)",
+            },
+            "phone"
+          )
+          .to(
+            this.roomMeshes.phone.scale,
+            {
+              x: 1,
+              y: 1,
+              z: 1,
+              duration: 0.26,
+              ease: "back.out(2.2)",
+            },
+            "phone"
+          )
+          .to(
+            this.roomMeshes.book.scale,
+            {
+              x: 1,
+              y: 1,
+              z: 1,
+              duration: 0.26,
+              ease: "back.out(2.2)",
+            },
+            "access2"
+          )
+          .to(
+            this.roomMeshes.torus.scale,
+            {
+              x: 1,
+              y: 1,
+              z: 1,
+              duration: 0.26,
+              ease: "back.out(2.2)",
+            },
+            "access1"
+          )
+          .to(
+            this.roomMeshes.bota1.scale,
+            {
+              x: 1,
+              y: 1,
+              z: 1,
+              duration: 0.26,
+              ease: "back.out(2.2)",
+            },
+            "access2"
+          )
+          .to(
+            this.roomMeshes.cap.scale,
+            {
+              x: 1,
+              y: 1,
+              z: 1,
+              duration: 0.26,
+              ease: "back.out(2.2)",
+            },
+            "access1"
+          )
+          .to(this.roomMeshes.chairbase.scale, {
+            x: 1,
+            y: 1,
+            z: 1,
+            duration: 0.26,
+            ease: "back.out(2.2)",
+          })
+          .to(
+            this.roomMeshes.chair.scale,
+            {
+              x: 1,
+              y: 1,
+              z: 1,
+              duration: 1,
+              ease: "back.out(1.0)",
+            },
+            "chair"
+          )
+          .to(
+            this.roomMeshes.chair.rotation,
+            {
+              z: 6.56 * Math.PI + Math.PI / 5,
+              ease: "power2.out",
+            },
+            "chair"
+          )
+          .to(
+            this.roomMeshes.floorCircle.scale,
+            !this.compatibility.isMobileDevice
+              ? circleDesktopParams
+              : { x: 0, y: 0, z: 0 },
+            "chair"
+          )
+          .to(
+            "#bottom-title-top .animatedivs",
+            {
+              yPercent: 0,
+              stagger: 0.05,
+              ease: "back.out(1.7)",
+            },
+            "title"
+          )
+          .to(
+            "#bottom-title-middle .animatedivs",
+            {
+              yPercent: 0,
+              stagger: 0.05,
+              ease: "back.out(1.7)",
+            },
+            "title"
+          )
+          .to(
+            "#bottom-title-bottom .animatedivs",
+            {
+              yPercent: 0,
+              stagger: 0.05,
+              ease: "back.out(1.7)",
+            },
+            "title"
+          )
+          .to(
+            "#top-title-top .animatedivs",
+            {
+              yPercent: 0,
+              stagger: 0.05,
+              ease: "back.out(1.7)",
+            },
+            "title"
+          )
+          .to(
+            "#top-title-bottom .animatedivs",
+            {
+              yPercent: 0,
+              stagger: 0.05,
+              ease: "back.out(1.7)",
+            },
+            "title"
+          )
+          .to(
+            "#top-title-bottom .animatedivs",
+            {
+              yPercent: 0,
+              stagger: 0.05,
+              ease: "back.out(1.7)",
+            },
+            "title"
+          )
+          .to(".scroll-down-wrapper", {
+            opacity: 1,
+            duration: 0.5,
+            onComplete: resolve,
+          });
+      } else {
+        resolve();
+      }
     });
   }
 
@@ -519,7 +558,7 @@ export default class Preloader extends EventEmitter {
   }
 
   onClick(e) {
-    if(e.target){
+    if (e.target) {
       this.removeEventListeners();
       this.playSecondIntro();
     }
@@ -529,6 +568,7 @@ export default class Preloader extends EventEmitter {
     window.removeEventListener("wheel", this.scrollOnceEvent);
     window.removeEventListener("touchstart", this.touchStart);
     window.removeEventListener("touchmove", this.touchMove);
+    window.removeEventListener("click", this.click);
   }
 
   async playIntro() {
@@ -566,6 +606,66 @@ export default class Preloader extends EventEmitter {
   async playThirdIntro() {
     await this.thirdIntro();
     this.emit("enablecontrols");
+  }
+
+  safeMeshesMode() {
+    return new Promise((resolve) => {
+      var currentIndex = 0;
+      const lastIndex = Object.keys(this.roomMeshes).length - 1;
+
+      for (var mesh in this.roomMeshes) {
+        if (this.roomMeshes.hasOwnProperty(mesh)) {
+          if (
+            this.roomMeshes[mesh].name != "loadcube" &&
+            this.roomMeshes[mesh].name != ""
+          ) {
+            this.roomMeshes[mesh].scale.set(1, 1, 1);
+          } else if (this.roomMeshes[mesh].name == "loadcube") {
+            this.roomMeshes[mesh].scale.set(0, 0, 0);
+          }
+
+          if (currentIndex == lastIndex) {
+            setTimeout(() => {
+              resolve();
+            }, 1000);
+          } else {
+            currentIndex++;
+          }
+        }
+      }
+    });
+  }
+
+  async handleSafeButton() {
+    this.killTimelines = true;
+
+    if (this.timeline) {
+      this.timeline.kill();
+    }
+
+    if (this.secondTimeline) {
+      this.timeline.kill();
+    }
+
+    if (this.thirdTimeline) {
+      this.timeline.kill();
+    }
+
+    this.time.update();
+
+    if (!this.device) {
+      this.camera.orthographicCamera.position.set(0, 3.2, 5);
+      this.room.position.set(0, 0, 0);
+    } else {
+      this.camera.orthographicCamera.position.set(0.07, 3.05, 0);
+      this.room.position.set(0, 0, 0);
+    }
+
+    await this.safeMeshesMode();
+
+    this.time.stopUpdating();
+
+    this.staticTimeline = new
   }
 
   resize() {}

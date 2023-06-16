@@ -14,6 +14,7 @@ import Preloader from "./Preloader";
 
 import World from "./World/World";
 import Controls from "./Controls";
+import Alert from "./Utils/Alert";
 
 export default class Experience {
   static instance;
@@ -27,14 +28,22 @@ export default class Experience {
     this.canvas = canvas;
     this.scene = new THREE.Scene();
     this.observer = new Observer();
-    this.time = new Time();
     this.sizes = new Sizes();
     this.camera = new Camera();
     this.renderer = new Renderer();
+    this.alert = new Alert();
+    this.time = new Time();
     this.resources = new Resources(assets);
     this.world = new World();
     this.preloader = new Preloader();
     this.controls = new Controls();
+    this.static = false;
+
+    this.alert.on("safeButton", ()=>{
+      this.static = true;
+      this.renderer.setStaticView();
+      this.world.setStaticView();
+    });
 
     this.time.on("update", () => {
       this.update();

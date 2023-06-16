@@ -35,23 +35,5 @@ export default class Compatibility extends EventEmitter {
       this.isMobileDevice = false;
       this.emit("switchdevice", this.isMobileDevice);
     }
-
-    /*  if (window.innerWidth <= 968 && this.isMobileDevice == false) {
-      this.isMobileDevice = true;
-      this.emit("switchdevice", this.isMobileDevice);
-    } else if (!(window.innerWidth <= 968) && this.isMobileDevice == true) {
-      this.isMobileDevice = false;
-      this.emit("switchdevice", this.isMobileDevice);
-    }
-
-    if (this.width <= 968 && this.isMobileDevice !== false) {
-      console.log("mudou");
-      this.device = true;
-      this.emit("switchdevice", this.device);
-    } else if (this.width > 968 && this.isMobileDevice !== true) {
-      console.log("mudou");
-      this.device = false;
-      this.emit("switchdevice", this.device);
-    } */
   }
 }

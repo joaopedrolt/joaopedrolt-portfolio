@@ -12,6 +12,7 @@ export default class World extends EventEmitter {
     this.experience = new Experience();
     this.resources = this.experience.resources;
     this.compatibility = this.experience.compatibility;
+    this.static = false;
 
     this.resources.on("ready", () => {
       this.environment = new Environment();
@@ -22,12 +23,18 @@ export default class World extends EventEmitter {
     });
   }
 
+  setStaticView() {
+    this.static = true;
+  }
+
   resize() {}
 
   update() {
     if (this.room) {
       if (!this.compatibility.isMobileDevice) {
-        this.room.update();
+        if (!this.static) {
+          this.room.update();
+        }
       }
     }
   }
