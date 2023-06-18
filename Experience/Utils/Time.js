@@ -19,13 +19,16 @@ export default class Time extends EventEmitter {
     this.delta = 16;
     this.animationFrameId = null;
     this.alertIssued = false;
+    this.static = false;
 
     this.alert.on("ignoreButton", () => {
       this.update();
     });
 
     this.observer.on("canvasVisible", (visible) => {
-      this.setAnimation(visible);
+      if(!this.static){
+        this.setAnimation(visible);
+      }
     });
 
     /*     this.fpsTracker(); */
@@ -98,5 +101,10 @@ export default class Time extends EventEmitter {
 
   stopUpdating() {
     window.cancelAnimationFrame(this.animationFrameId);
+  }
+
+  setStaticView() {
+    this.static = true;
+    console.log(this.static);
   }
 }

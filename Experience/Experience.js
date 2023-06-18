@@ -39,10 +39,11 @@ export default class Experience {
     this.controls = new Controls();
     this.static = false;
 
-    this.alert.on("safeButton", ()=>{
+    this.alert.on("safeButton", () => {
       this.static = true;
       this.renderer.setStaticView();
       this.world.setStaticView();
+      this.time.setStaticView();
     });
 
     this.time.on("update", () => {

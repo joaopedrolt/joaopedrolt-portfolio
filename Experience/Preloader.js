@@ -529,6 +529,106 @@ export default class Preloader extends EventEmitter {
     });
   }
 
+  staticIntro() {
+    return new Promise((resolve) => {
+      this.staticTimeline = new GSAP.timeline();
+
+      this.staticTimeline
+        .to(
+          "#bottom-title-top .animatedivs",
+          {
+            yPercent: 0,
+            stagger: 0.05,
+            ease: "back.out(1.7)",
+          },
+          "title"
+        )
+        .to(
+          "#bottom-title-middle .animatedivs",
+          {
+            yPercent: 0,
+            stagger: 0.05,
+            ease: "back.out(1.7)",
+          },
+          "title"
+        )
+        .to(
+          "#bottom-title-bottom .animatedivs",
+          {
+            yPercent: 0,
+            stagger: 0.05,
+            ease: "back.out(1.7)",
+          },
+          "title"
+        )
+        .to(
+          "#top-title-top .animatedivs",
+          {
+            yPercent: 0,
+            stagger: 0.05,
+            ease: "back.out(1.7)",
+          },
+          "title"
+        )
+        .to(
+          "#top-title-bottom .animatedivs",
+          {
+            yPercent: 0,
+            stagger: 0.05,
+            ease: "back.out(1.7)",
+          },
+          "title"
+        )
+        .to(
+          "#top-title-bottom .animatedivs",
+          {
+            yPercent: 0,
+            stagger: 0.05,
+            ease: "back.out(1.7)",
+          },
+          "title"
+        )
+        .to(".scroll-down-wrapper", {
+          opacity: 1,
+          duration: 0.5,
+          onComplete: resolve,
+        });
+    });
+  }
+
+  safeMeshesMode() {
+    return new Promise((resolve) => {
+      var currentIndex = 0;
+      const lastIndex = Object.keys(this.roomMeshes).length - 1;
+
+      for (var mesh in this.roomMeshes) {
+        if (this.roomMeshes.hasOwnProperty(mesh)) {
+          if (this.roomMeshes[mesh].name != "loadcube") {
+            this.roomMeshes[mesh].scale.set(1, 1, 1);
+
+            if (this.roomMeshes[mesh].name == "") {
+              if (!this.device) {
+                this.roomMeshes[mesh].scale.set(0.4, 0.4, 0.4);
+              } else {
+                this.roomMeshes[mesh].scale.set(0, 0, 0);
+              }
+            }
+          } else if (this.roomMeshes[mesh].name == "loadcube") {
+            this.roomMeshes[mesh].scale.set(0, 0, 0);
+          }
+
+          if (currentIndex == lastIndex) {
+            setTimeout(() => {
+              resolve();
+            }, 1000);
+          } else {
+            currentIndex++;
+          }
+        }
+      }
+    });
+  }
+
   onScroll(e) {
     if (e.deltaY > 0) {
       window.removeEventListener("wheel", this.scrollOnceEvent);
@@ -608,36 +708,10 @@ export default class Preloader extends EventEmitter {
     this.emit("enablecontrols");
   }
 
-  safeMeshesMode() {
-    return new Promise((resolve) => {
-      var currentIndex = 0;
-      const lastIndex = Object.keys(this.roomMeshes).length - 1;
-
-      for (var mesh in this.roomMeshes) {
-        if (this.roomMeshes.hasOwnProperty(mesh)) {
-          if (
-            this.roomMeshes[mesh].name != "loadcube" &&
-            this.roomMeshes[mesh].name != ""
-          ) {
-            this.roomMeshes[mesh].scale.set(1, 1, 1);
-          } else if (this.roomMeshes[mesh].name == "loadcube") {
-            this.roomMeshes[mesh].scale.set(0, 0, 0);
-          }
-
-          if (currentIndex == lastIndex) {
-            setTimeout(() => {
-              resolve();
-            }, 1000);
-          } else {
-            currentIndex++;
-          }
-        }
-      }
-    });
-  }
-
   async handleSafeButton() {
     this.killTimelines = true;
+
+    document.querySelector(".intro").remove();
 
     if (this.timeline) {
       this.timeline.kill();
@@ -654,10 +728,11 @@ export default class Preloader extends EventEmitter {
     this.time.update();
 
     if (!this.device) {
-      this.camera.orthographicCamera.position.set(0, 3.2, 5);
+      this.camera.orthographicCamera.position.set(0.04, 3.2, 5);
       this.room.position.set(0, 0, 0);
     } else {
-      this.camera.orthographicCamera.position.set(0.07, 3.05, 0);
+      console.log(`device`);
+      this.camera.orthographicCamera.position.set(0.07, 3.05, 5);
       this.room.position.set(0, 0, 0);
     }
 
@@ -665,7 +740,9 @@ export default class Preloader extends EventEmitter {
 
     this.time.stopUpdating();
 
-    this.staticTimeline = new
+    await this.staticIntro();
+
+    this.emit("enablecontrols");
   }
 
   resize() {}
