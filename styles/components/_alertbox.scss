@@ -68,17 +68,17 @@
 
       #cancel-button {
         h4 {
-          color: #ff0000 !important;
+          color: var(--color-red) !important;
         }
       }
     }
   }
 
-  &.show{
+  &.show {
     opacity: 1;
 
-    .alert-box{
-        opacity: 1;
+    .alert-box {
+      opacity: 1;
     }
   }
 
