@@ -64,6 +64,5 @@ export default class Experience {
     this.compatibility.resize();
     this.camera.resize();
     this.renderer.resize();
-    this.world.room.resize();
   }
 }
