@@ -8,7 +8,7 @@
 - Progresso: Completo.
 - Tecnologias utilizadas: Html, Sass, Javascript, Three.js, GSAP e EmailJS.
 - Requisitos: Node.js, Vite.
-- Observação: Para uma melhor experiencia, ative "Aceleração de hardware" ou "Hardware acceleration" no seu navegador, não obrigatório (WebGl).
+- Observação: Para uma melhor experiencia ative "Aceleração de hardware" ou "Hardware acceleration" no seu navegador, não obrigatório (WebGl).
 
 <h3 align="center">Utilização</h3>
 
