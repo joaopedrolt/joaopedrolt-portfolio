@@ -35,8 +35,4 @@ export default class Floor {
     this.circle.receiveShadow = true;
     this.scene.add(this.circle);
   }
-
-  resize() {}
-
-  update() {}
 }

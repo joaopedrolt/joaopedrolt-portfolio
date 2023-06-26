@@ -1,5 +1,4 @@
 import { EventEmitter } from "events";
-/* import Stats from "../../public/stats.js/src/Stats"; */
 import Experience from "../Experience.js";
 
 export default class Time extends EventEmitter {
@@ -26,12 +25,10 @@ export default class Time extends EventEmitter {
     });
 
     this.observer.on("canvasVisible", (visible) => {
-      if(!this.static){
+      if (!this.static) {
         this.setAnimation(visible);
       }
     });
-
-    /*     this.fpsTracker(); */
   }
 
   setAnimation(visible) {
@@ -49,17 +46,8 @@ export default class Time extends EventEmitter {
     }
     return sum / this.fpsValues.length;
   }
-  /* 
-   fpsTracker() {
-    this.stats = new Stats();
-    this.stats.showPanel(0);
-    // 0: fps, 1: ms, 2: mb, 3+: custom
-    document.body.appendChild(this.stats.dom);
-  } */
 
   update() {
-    console.log("ads");
-
     this.animationFrameId = window.requestAnimationFrame(() => this.update());
 
     if (this.elapsed <= 20000) {
@@ -105,6 +93,5 @@ export default class Time extends EventEmitter {
 
   setStaticView() {
     this.static = true;
-    console.log(this.static);
   }
 }

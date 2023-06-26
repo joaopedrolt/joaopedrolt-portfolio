@@ -1,0 +1,35 @@
+#contact-arrow {
+  display: flex;
+  margin-left: 15px;
+  animation: arrow-loop 1.5s infinite ease-in-out;
+
+  @media (max-width: $tablet) {
+    margin-left: 0px;
+    justify-content: center;
+    animation: arrow-loop-mobile 1.4s infinite ease-in-out;
+  }
+}
+
+@keyframes arrow-loop {
+  0% {
+    transform: translateX(0) translateY(-4.5px);
+  }
+  50% {
+    transform: translateX(7px) translateY(-4.5px);
+  }
+  100% {
+    transform: translateX(0) translateY(-4.5px);
+  }
+}
+
+@keyframes arrow-loop-mobile {
+  0% {
+    transform: translateX(-5px) translateY(-4.5px);
+  }
+  50% {
+    transform: translateX(5px) translateY(-4.5px);
+  }
+  100% {
+    transform: translateX(-5px) translateY(-4.5px);
+  }
+}

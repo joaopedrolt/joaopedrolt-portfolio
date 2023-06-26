@@ -1,16 +1,12 @@
 import Experience from "../Experience";
 import * as THREE from "three";
-import GSAP from "gsap";
-/* import * as dat from "dat.gui"; */
 
 export default class Environment {
   constructor() {
     this.experience = new Experience();
     this.scene = this.experience.scene;
-    /* this.gui = new dat.GUI(); */
 
     this.setSunLight();
-    /* this.setGUI(); */
   }
 
   setSunLight() {
@@ -36,7 +32,6 @@ export default class Environment {
 
     this.gui.addColor(this.obj, "colorObj").onChange(() => {
       this.sunLight.color.copy(this.obj.colorObj);
-      /* this.ambientLight.color.copy(this.obj.colorObj); */
     });
 
     this.gui.add(this.obj, "intensity", 0, 10).onChange(() => {
@@ -44,8 +39,4 @@ export default class Environment {
       this.sunLight.ambientLight = this.obj.intensity;
     });
   }
-
-  resize() {}
-
-  update() {}
 }

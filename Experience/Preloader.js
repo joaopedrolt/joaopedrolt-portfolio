@@ -293,20 +293,28 @@ export default class Preloader extends EventEmitter {
             duration: 0.4,
             ease: "back.out(1.0)",
           })
-          .to(this.roomMeshes.wardrobe.scale, {
-            x: 1,
-            y: 1,
-            z: 1,
-            duration: 0.4,
-            ease: "back.out(1.0)",
-          })
-          .to(this.roomMeshes.shelf.scale, {
-            x: 1,
-            y: 1,
-            z: 1,
-            duration: 0.4,
-            ease: "back.out(1.0)",
-          })
+          .to(
+            this.roomMeshes.wardrobe.scale,
+            {
+              x: 1,
+              y: 1,
+              z: 1,
+              duration: 0.4,
+              ease: "back.out(1.0)",
+            },
+            "wardrobe"
+          )
+          .to(
+            this.roomMeshes.shelf.scale,
+            {
+              x: 1,
+              y: 1,
+              z: 1,
+              duration: 0.4,
+              ease: "back.out(1.0)",
+            },
+            "wardrobe"
+          )
           .to(
             this.roomMeshes.coffee.scale,
             {
@@ -351,20 +359,28 @@ export default class Preloader extends EventEmitter {
             },
             "mouse"
           )
-          .to(this.roomMeshes.desktop.scale, {
-            x: 1,
-            y: 1,
-            z: 1,
-            duration: 0.26,
-            ease: "back.out(2.2)",
-          })
-          .to(this.roomMeshes.screen.scale, {
-            x: 1,
-            y: 1,
-            z: 1,
-            duration: 0.26,
-            ease: "back.out(2.2)",
-          })
+          .to(
+            this.roomMeshes.desktop.scale,
+            {
+              x: 1,
+              y: 1,
+              z: 1,
+              duration: 0.26,
+              ease: "back.out(2.2)",
+            },
+            "pc"
+          )
+          .to(
+            this.roomMeshes.screen.scale,
+            {
+              x: 1,
+              y: 1,
+              z: 1,
+              duration: 0.26,
+              ease: "back.out(2.2)",
+            },
+            "pc"
+          )
           .to(
             this.roomMeshes.fio.scale,
             {
@@ -731,7 +747,6 @@ export default class Preloader extends EventEmitter {
       this.camera.orthographicCamera.position.set(0.04, 3.2, 5);
       this.room.position.set(0, 0, 0);
     } else {
-      console.log(`device`);
       this.camera.orthographicCamera.position.set(0.07, 3.05, 5);
       this.room.position.set(0, 0, 0);
     }
@@ -744,6 +759,4 @@ export default class Preloader extends EventEmitter {
 
     this.emit("enablecontrols");
   }
-
-  resize() {}
 }

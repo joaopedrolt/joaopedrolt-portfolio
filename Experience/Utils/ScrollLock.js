@@ -6,7 +6,8 @@ export default class ScrollLock {
   keys = { 37: 1, 38: 1, 39: 1, 40: 1 };
 
   wheelOpt = this.supportsPassive ? { passive: false } : false;
-  wheelEvent = "onwheel" in document.createElement("div") ? "wheel" : "mousewheel";
+  wheelEvent =
+    "onwheel" in document.createElement("div") ? "wheel" : "mousewheel";
 
   supportsPassive() {
     this.supportsPassive = false;
@@ -40,7 +41,7 @@ export default class ScrollLock {
       this.wheelEvent,
       this.preventDefault,
       this.wheelOpt
-    ); 
+    );
     window.addEventListener("touchmove", this.preventDefault, this.wheelOpt); // mobile
     window.addEventListener("keydown", this.preventDefaultForScrollKeys, false);
   }

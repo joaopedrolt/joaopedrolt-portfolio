@@ -105,7 +105,6 @@ export default class Controls {
             start: "top top",
             end: "bottom top",
             scrub: true,
-            /* markers: true, */
             invalidateOnRefresh: true,
           },
         })
@@ -154,8 +153,4 @@ export default class Controls {
       }
     });
   }
-
-  resize() {}
-
-  update() {}
 }

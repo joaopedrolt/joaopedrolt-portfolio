@@ -27,8 +27,6 @@ export default class World extends EventEmitter {
     this.static = true;
   }
 
-  resize() {}
-
   update() {
     if (this.room) {
       if (!this.compatibility.isMobileDevice) {

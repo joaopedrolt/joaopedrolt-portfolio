@@ -1,8 +1,6 @@
 import Experience from "../Experience";
 import * as THREE from "three";
 import GSAP from "gsap";
-/* 
-import * as dat from "dat.gui"; */
 
 export default class Room {
   constructor() {
@@ -13,8 +11,6 @@ export default class Room {
     this.actualRoom = this.room.scene;
     this.compatibility = this.experience.compatibility;
     this.roomMeshes = {};
-
-    /* this.gui = new dat.GUI(); */
 
     this.setModel();
     this.checkCompatibility();
@@ -40,20 +36,15 @@ export default class Room {
 
       child.scale.set(0, 0, 0);
 
-      /* if (child.name === "loadcube") {
-        child.scale.set(0.1877988576889038, 0.1877988576889038, 0.1877988576889038);
-      } */
-
       this.roomMeshes[child.name.toLowerCase()] = child;
     });
 
-    if (!this.compatibility.isMobileDevice){
+    if (!this.compatibility.isMobileDevice) {
       this.actualRoom.scale.set(0.9, 0.9, 0.9);
     } else {
       this.actualRoom.scale.set(0.6, 0.6, 0.6);
     }
 
-    /* console.log(this.actualRoom.position) */
     this.scene.add(this.actualRoom);
   }
 
@@ -72,7 +63,7 @@ export default class Room {
         target: 0,
         ease: 0.1,
       };
-      
+
       this.actualRoom.rotation.y = 0.06;
     }
   }
@@ -80,8 +71,8 @@ export default class Room {
   onMouseMove() {
     window.addEventListener("mousemove", (e) => {
       this.rotation =
-        ((e.clientX - window.innerWidth / 2.6) * 2.6) / window.innerWidth;
-      this.lerp.target = this.rotation * 0.14;
+        ((e.clientX - window.innerWidth / 2.16) * 2.16) / window.innerWidth;
+      this.lerp.target = this.rotation * 0.15;
     });
   }
 
