@@ -3,7 +3,7 @@
 <h3 align="center">Informações</h3>
  
 - Nome do Projeto: Portfólio | João Pedro Lima Teixeira.
-- Autoria: Autoria própria, inspirado no projeto do usuário bokoko33.
+- Autoria: Autoria própria, modelagem 3D do meu próprio quarto. Inspirado no projeto do usuário bokoko33.
 - Proposito: Juntar e exibir meus projetos em apenas um lugar.
 - Progresso: Completo.
 - Tecnologias utilizadas: Html, Sass, Javascript, Three.js, GSAP e EmailJS.
