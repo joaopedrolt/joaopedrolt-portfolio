@@ -1,4 +1,4 @@
-<h2 align="center">Meu portfólio</h2>
+<h2 align="center">Portfólio | João Pedro Lima Teixeira</h2>
 
 <h3 align="center">Informações</h3>
  
@@ -7,7 +7,8 @@
 - Proposito: Juntar e exibir meus projetos em apenas um lugar.
 - Progresso: Completo.
 - Tecnologias utilizadas: Html, Sass, Javascript, Three.js, GSAP e EmailJS.
-- Requisitos: Node.js, Vite, recomendado ativar "Aceleração de hardware" ou "Hardware acceleration" no seu navegador (WebGl).
+- Requisitos: Node.js, Vite.
+- Observação: Para uma melhor experiencia, ative "Aceleração de hardware" ou "Hardware acceleration" no seu navegador, não obrigatório (WebGl).
 
 <h3 align="center">Utilização</h3>
 
@@ -21,7 +22,7 @@
 - Clonar ou fazer download do projeto.
 - npm install
 - npm run dev
-(Api EmailJs não estará conectada) 
+- Observação: Envio de email não habilitado nessa opção.
 
 <h3 align="center">Imagens do Software</h3>
 
