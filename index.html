@@ -1,391 +1,393 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" href="favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <title>Portfólio | Joaopedrolt</title>
-    <meta name="author" content="joaopedrolt" />
-    <meta property="og:site_name" content="Portfólio | Joaopedrolt" />
-    <meta property="og:title" content="Portfólio | João Pedro Lima Teixeira" />
-    <meta property="og:description" content="Desenvolvedor Web FullStack" />
-    <meta property="og:image" content="/images/page-home.jpg" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-  </head>
-  <body class="light-theme">
-    <div class="preloader">
-      <div class="preloader-wrapper">
-        <div class="loading">
-          <div class="circle"></div>
-          <div class="circle"></div>
-          <div class="circle"></div>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>Portfólio | Joaopedrolt</title>
+  <meta name="author" content="joaopedrolt" />
+  <meta property="og:site_name" content="Portfólio | Joaopedrolt" />
+  <meta property="og:title" content="Portfólio | João Pedro Lima Teixeira" />
+  <meta property="og:description" content="Desenvolvedor FullStack" />
+  <meta property="og:image" content="/images/page-home.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+</head>
+
+<body class="light-theme">
+  <div class="preloader">
+    <div class="preloader-wrapper">
+      <div class="loading">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+      </div>
+    </div>
+  </div>
+  <div class="page" asscroll-container>
+    <div id="page" class="page-wrapper" style="opacity: 0" asscroll>
+      <section class="home">
+        <div class="experience">
+          <canvas class="experience-canvas"></canvas>
         </div>
-      </div>
-    </div>
-    <div class="page" asscroll-container>
-      <div id="page" class="page-wrapper" style="opacity: 0" asscroll>
-        <section class="home">
-          <div class="experience">
-            <canvas class="experience-canvas"></canvas>
+        <div class="hud">
+          <div class="hud-wrapper">
+            <div class="intro" id="intro">Bem-vindo ao meu portfólio!</div>
+            <div class="top-title">
+              <div class="title-wrapper">
+                <h2 id="top-title-top">JOAOPEDROLT</h2>
+                <h2 id="top-title-bottom">PORTFOLIO</h2>
+              </div>
+            </div>
+            <div class="bottom-title">
+              <h1 class="large" id="bottom-title-top">JOÃO PEDRO</h1>
+              <h1 class="large" id="bottom-title-middle">LIMA TEIXEIRA</h1>
+              <h4 id="bottom-title-bottom">Desenvolvedor FullStack</h4>
+            </div>
+            <div class="scroll-down-wrapper">
+              <div class="scroll-down-icon"></div>
+            </div>
           </div>
-          <div class="hud">
-            <div class="hud-wrapper">
-              <div class="intro" id="intro">Bem-vindo ao meu portfólio!</div>
-              <div class="top-title">
-                <div class="title-wrapper">
-                  <h2 id="top-title-top">JOAOPEDROLT</h2>
-                  <h2 id="top-title-bottom">PORTFOLIO</h2>
+        </div>
+      </section>
+      <section class="real-room spacing">
+        <div class="container">
+          <div class="media" data-aos="fade-up" data-aos-delay="100">
+            <div class="image-wrapper">
+              <img src="./images/room.jpg" alt="Meu quarto real" loading="lazy" />
+            </div>
+          </div>
+          <div class="content" data-aos="fade-up" data-aos-delay="200">
+            <div class="heading">
+              <h4>Bem-vindo ao meu Espaço</h4>
+              <h1>Do mundo real para o navegador</h1>
+            </div>
+            <h3 class="description">
+              Em vez de apenas mostrar projetos, decidi abrir a porta do meu quarto. Modelei e animei cada detalhe em 3D
+              e, com Three.js, criei esse espaço digital para você explorar direto do navegador.
+            </h3>
+            <p class="note">Nenhuma IA foi utilizada na criação desse projeto.</p>
+          </div>
+        </div>
+      </section>
+      <section class="about-me spacing">
+        <div data-aos="fade-up" data-aos-delay="200" class="container">
+          <div class="heading">
+            <h4>Olá, me chamo João Pedro</h4>
+            <h1>
+              Sou um desenvolvedor fullstack graduado e com experiência consolidada em frameworks JavaScript, aplicações
+              do ecossistema .NET e banco de dados relacionais.
+            </h1>
+            <h3>
+              Atuo em todas as camadas do desenvolvimento de software: desde o frontend, utilizando Vue, React ou
+              Angular, até o backend, com .NET (em seus diferentes tipos de aplicações) e Node.js. Além disso, tenho
+              vasta
+              experiência em modelagem, integração e otimização de bancos de dados relacionais em SQL, como SQL Server e
+              PostgreSQL.
+            </h3>
+            <a href="https://www.linkedin.com/in/joaopedrolt/" target="_blank">
+              Ver experiência completa.</a>
+          </div>
+          <div class="text-switcher">
+            <div class="text-container" id="text-container">
+              <span>&lt;div&gt; I'm a</span>
+              <div class="text-wrapper">
+                <div class="ghost-text" id="ghost-text">Developer</div>
+                <div class="switching-text" id="switching-text">
+                  Developer
                 </div>
               </div>
-              <div class="bottom-title">
-                <h1 class="large" id="bottom-title-top">JOÃO PEDRO</h1>
-                <h1 class="large" id="bottom-title-middle">LIMA TEIXEIRA</h1>
-                <h4 id="bottom-title-bottom">Desenvolvedor Web FullStack</h4>
+              <span>&lt;/div&gt;</span>
+            </div>
+          </div>
+          <div class="stack">
+            <div class="left">
+              <div class="content left-margin">
+                <div class="icon-wrapper">
+                  <i class="fa-solid fa-window-maximize"></i>
+                  <div class="icon-circle"></div>
+                </div>
+                <h4>Frontend</h4>
+                <div class="stack-wrapper" id="frameworks">
+                  <h3>
+                    Vue.js <em> / </em> React <em> / </em> Angular <em> / </em>
+                    TypeScript <em> / </em> JavaScript <em> / </em>
+                    Sass <em> / </em> Bootstrap <em> / </em>
+                    React Native <em> / </em> Vuetify
+                  </h3>
+                </div>
               </div>
-              <div class="scroll-down-wrapper">
-                <div class="scroll-down-icon"></div>
+            </div>
+            <div class="right">
+              <div class="content right-margin">
+                <div class="icon-wrapper">
+                  <i class="fa-solid fa-gear"></i>
+                  <div class="icon-circle"></div>
+                </div>
+                <h4>Backend</h4>
+                <div class="stack-wrapper" id="dev-tools">
+                  <h3>
+                    C# <em> / </em> .NET &amp; ASP.NET <em> / </em> Node.js &amp; Express <em> / </em>
+                    SQL Server <em> / </em> PostgreSQL <em> / </em> SQLite <em> / </em> MongoDB <em> / </em>
+                    WPF &amp; Windows Forms
+                  </h3>
+                </div>
               </div>
             </div>
           </div>
-        </section>
-        <section class="about-me spacing">
-          <div data-aos="fade-up" data-aos-delay="200" class="container">
-            <div class="heading">
-              <h4>Algumas palavras sobre mim</h4>
-              <h1>
-                Eu me chamo João Pedro, sou um programador multidisciplinar com
-                foco no desenvolvimento web. Sou graduado em Desenvolvimento de
-                Sistemas e possuo especialização em criação de websites
-                responsivos e interfaces de usuário funcionais, visando
-                proporcionar as melhores experiências aos clientes.
+        </div>
+      </section>
+      <section class="projects spacing">
+        <div class="container">
+          <div class="heading">
+            <h4>PORTFOLIO</h4>
+            <h1>Projetos Selecionados</h1>
+          </div>
+          <div class="projects-container">
+            <div class="project-card left">
+              <div class="card-wrapper">
+                <div class="card-heading">
+                  <span class="date">2024</span>
+                  <span class="title">Furvana E-Commerce Template</span>
+                  <span class="tools">Vue / Vuetify / Firebase</span>
+                </div>
+                <div class="card-info">
+                  <div class="info-wrapper">
+                    <a href="https://github.com/joaopedrolt/furvana-ecommerce" target="_blank" class="box">
+                      <i class="fa-brands fa-github"></i>
+                      <span class="https://github.com/joaopedrolt/furvana-ecommerce">Documentação</span>
+                    </a>
+                    <a href="https://furvana-ecommerce.vercel.app/" target="_blank" class="box">
+                      <i class="fa-solid fa-earth-americas"></i>
+                      <span class="span">Live Demo</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <img class="project-img" src="./projects/furvana.jpg" alt="" />
+            </div>
+            <div class="project-card right">
+              <div class="card-wrapper">
+                <div class="card-heading">
+                  <span class="date">2024</span>
+                  <span class="title">Trembo Music Bot</span>
+                  <span class="tools">Node.js / DiscordJs</span>
+                </div>
+                <div class="card-info">
+                  <div class="info-wrapper">
+                    <a href="https://github.com/joaopedrolt/trembo-discordbot-nodejs" target="_blank" class="box">
+                      <i class="fa-brands fa-github"></i>
+                      <span class="">Documentação</span>
+                    </a>
+                    <a href="https://discord.com/oauth2/authorize?client_id=1126697270553874483&scope=bot+applications.commands&permissions=36768832"
+                      target="_blank" class="box">
+                      <i class="fa-solid fa-earth-americas"></i>
+                      <span class="span">Adicionar ao Servidor</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <img class="project-img" src="./projects/trembo_bot.jpg" alt="" />
+            </div>
+            <div class="project-card left">
+              <div class="card-wrapper">
+                <div class="card-heading">
+                  <span class="date">2023</span>
+                  <span class="title">Clone do Whatsapp Web</span>
+                  <span class="tools">React / Firebase</span>
+                </div>
+                <div class="card-info">
+                  <div class="info-wrapper">
+                    <a href="https://github.com/joaopedrolt/whatsapp-clone-reactjs" target="_blank" class="box">
+                      <i class="fa-brands fa-github"></i>
+                      <span class="">Documentação</span>
+                    </a>
+                    <a href="https://joaopedrolt.github.io/whatsapp-clone-reactjs" target="_blank" class="box">
+                      <i class="fa-solid fa-earth-americas"></i>
+                      <span class="span">Live Demo</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <img class="project-img" src="./projects/wpp.jpg" alt="" />
+            </div>
+            <div class="project-card right">
+              <div class="card-wrapper">
+                <div class="card-heading">
+                  <span class="date">2023</span>
+                  <span class="title">RealTi Landing Page</span>
+                  <span class="tools">Hmtl / Sass / Js</span>
+                </div>
+                <div class="card-info">
+                  <div class="info-wrapper">
+                    <a href="https://github.com/joaopedrolt/realti" target="_blank" class="box">
+                      <i class="fa-brands fa-github"></i>
+                      <span class="span">Documentação</span>
+                    </a>
+                    <a href="https://joaopedrolt.github.io/realti" target="_blank" class="box">
+                      <i class="fa-solid fa-earth-americas"></i>
+                      <span class="span">Live Demo</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <img class="project-img" src="./projects/realti.jpg" alt="" />
+            </div>
+            <div class="project-card left">
+              <div class="card-wrapper">
+                <div class="card-heading">
+                  <span class="date">2022</span>
+                  <span class="title">Journey Landing Page</span>
+                  <span class="tools">Hmtl / Sass / Js</span>
+                </div>
+                <div class="card-info">
+                  <div class="info-wrapper">
+                    <a href="https://github.com/joaopedrolt/journey-frontend" target="_blank" class="box">
+                      <i class="fa-brands fa-github"></i>
+                      <span class="span">Documentação</span>
+                    </a>
+                    <a href="https://joaopedrolt.github.io/journey-frontend" target="_blank" class="box">
+                      <i class="fa-solid fa-earth-americas"></i>
+                      <span class="span">Live Demo</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <img class="project-img" src="./projects/journey.jpg" alt="" />
+            </div>
+            <div class="project-card right">
+              <div class="card-wrapper">
+                <div class="card-heading">
+                  <span class="date">2022</span>
+                  <span class="title">Travel Landing Page</span>
+                  <span class="tools">Hmtl / Sass / Js</span>
+                </div>
+                <div class="card-info">
+                  <div class="info-wrapper">
+                    <a href="https://github.com/joaopedrolt/travel-frontend" target="_blank" class="box">
+                      <i class="fa-brands fa-github"></i>
+                      <span class="span">Documentação</span>
+                    </a>
+                    <a href="https://joaopedrolt.github.io/travel-frontend" target="_blank" class="box">
+                      <i class="fa-solid fa-earth-americas"></i>
+                      <span class="span">Live Demo</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <img class="project-img" src="./projects/travel.jpg" alt="" />
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="contact spacing">
+        <div class="container">
+          <div class="heading">
+            <h4>social</h4>
+            <h1>Informaçoes adicionais</h1>
+          </div>
+          <div class="social-container">
+            <div class="social-card">
+              <div class="icon-wrapper">
+                <i class="fa-brands fa-github"></i>
+                <div class="icon-circle"></div>
+              </div>
+              <p>joaopedrolt</p>
+              <a href="https://github.com/joaopedrolt" target="_blank" class="btn social-button">Github</a>
+            </div>
+            <div class="social-card">
+              <div class="icon-wrapper">
+                <i class="fa-brands fa-instagram"></i>
+                <div class="icon-circle"></div>
+              </div>
+              <p>@j_pedroll</p>
+              <a href="https://www.instagram.com/j_pedroll" target="_blank" class="btn social-button">Instagram</a>
+            </div>
+            <div class="social-card">
+              <div class="icon-wrapper">
+                <i class="fa-brands fa-linkedin"></i>
+                <div class="icon-circle"></div>
+              </div>
+              <p>joaopedrolt</p>
+              <a href="https://www.linkedin.com/in/joaopedrolt" target="_blank" class="btn social-button">Linkedin</a>
+            </div>
+            <div class="social-card">
+              <div class="icon-wrapper">
+                <i class="fa-solid fa-envelope"></i>
+                <div class="icon-circle"></div>
+              </div>
+              <p>joaopedrolimateixeira@outlook.com</p>
+              <a href="mailto:joaopedrolimateixeira@outlook.com" class="btn social-button">E-mail</a>
+            </div>
+          </div>
+          <div class="form-container" id="form-container">
+            <div class="text-container" id="work-together">
+              <h4>Se interessou?</h4>
+              <h1 class="title">
+                Vamos trabalhar juntos
+                <div id="contact-arrow">&#8594;</div>
               </h1>
-              <h3>
-                Nos últimos anos tenho me dedicado aos estudos das grandes
-                tecnologias no ramo do desenvolvimento web. Otimizando
-                funcionalidades para empresas e atuando em alguns projetos como
-                freelancer.
-              </h3>
-            </div>
-            <div class="text-switcher">
-              <div class="text-container" id="text-container">
-                <span>&lt;div&gt; I'm a</span>
-                <div class="text-wrapper">
-                  <div class="ghost-text" id="ghost-text">Developer</div>
-                  <div class="switching-text" id="switching-text">
-                    Developer
-                  </div>
-                </div>
-                <span>&lt;/div&gt;</span>
-              </div>
-            </div>
-            <div class="stack">
-              <div class="left">
-                <div class="content left-margin">
-                  <div class="icon-wrapper">
-                    <i class="fa-solid fa-gear"></i>
-                    <div class="icon-circle"></div>
-                  </div>
-                  <h4>FRAMEWORKS</h4>
-                  <div class="stack-wrapper" id="frameworks">
-                    <h3>
-                      React<em> / </em> JavaScript<em> / </em> TypeScript
-                      <em> / </em> Node.js &amp; Express <em> / </em> Sass
-                      <em> / </em> Bootstrap <em> / </em> Three.js
-                      <em> / </em> MongoDB <em> / </em> SQL
-                    </h3>
-                  </div>
-                </div>
-              </div>
-              <div class="right">
-                <div class="content right-margin">
-                  <div class="icon-wrapper">
-                    <i class="fa-solid fa-wrench"></i>
-                    <div class="icon-circle"></div>
-                  </div>
-                  <h4>DEV TOOLS</h4>
-                  <div class="stack-wrapper" id="dev-tools">
-                    <h3>
-                      Vite<em> / </em> Git & GitHub <em> / </em> Vercel
-                      <em> / </em> Linux <em> / </em> Firebase
-                      <em> / </em> Figma <em> / </em> Photoshop
-                      <em> / </em> Blender <em> / </em> Google Maps Api
-                    </h3>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
-        </section>
-        <section class="projects spacing">
-          <div class="container">
-            <div class="heading">
-              <h4>PORTFOLIO</h4>
-              <h1>Projetos Selecionados</h1>
+        </div>
+      </section>
+      <footer class="footer">
+        <div class="container">
+          <div class="box-container">
+            <div class="box">
+              <h3>JOAOPEDROLT</h3>
+              <p>
+                Sinta-se à vontade para entrar em contato comigo a qualquer
+                momento.
+              </p>
+              <span>©2021 João Pedro Lima Teixeira. Todos os direitos reservados.
+                Brasil, São Paulo.</span>
             </div>
-            <div class="projects-container">
-              <div class="project-card left">
-                <div class="card-wrapper">
-                  <div class="card-heading">
-                    <span class="date">2023</span>
-                    <span class="title">Clone do Whatsapp Web</span>
-                    <span class="tools">React / Firebase</span>
-                  </div>
-                  <div class="card-info">
-                    <div class="info-wrapper">
-                      <a
-                        href="https://github.com/joaopedrolt/whatsapp-clone-reactjs"
-                        target="_blank"
-                        class="box"
-                      >
-                        <i class="fa-brands fa-github"></i>
-                        <span class="">Documentação</span>
-                      </a>
-                      <a
-                        href="https://joaopedrolt.github.io/whatsapp-clone-reactjs"
-                        target="_blank"
-                        class="box"
-                      >
-                        <i class="fa-solid fa-earth-americas"></i>
-                        <span class="">Live Demo</span>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <img class="project-img" src="./projects/wpp.jpg" alt="" />
-              </div>
-              <div class="project-card right">
-                <div class="card-wrapper">
-                  <div class="card-heading">
-                    <span class="date">2023</span>
-                    <span class="title">RealTi Landing Page</span>
-                    <span class="tools">Hmtl / Sass / Js</span>
-                  </div>
-                  <div class="card-info">
-                    <div class="info-wrapper">
-                      <a
-                        href="https://github.com/joaopedrolt/realti"
-                        target="_blank"
-                        class="box"
-                      >
-                        <i class="fa-brands fa-github"></i>
-                        <span class="span">Documentação</span>
-                      </a>
-                      <a
-                        href="https://joaopedrolt.github.io/realti"
-                        target="_blank"
-                        class="box"
-                      >
-                        <i class="fa-solid fa-earth-americas"></i>
-                        <span class="span">Live Demo</span>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <img class="project-img" src="./projects/realti.jpg" alt="" />
-              </div>
-              <div class="project-card left">
-                <div class="card-wrapper">
-                  <div class="card-heading">
-                    <span class="date">2022</span>
-                    <span class="title">Journey Landing Page</span>
-                    <span class="tools">Hmtl / Sass / Js</span>
-                  </div>
-                  <div class="card-info">
-                    <div class="info-wrapper">
-                      <a
-                        href="https://github.com/joaopedrolt/journey-frontend"
-                        target="_blank"
-                        class="box"
-                      >
-                        <i class="fa-brands fa-github"></i>
-                        <span class="span">Documentação</span>
-                      </a>
-                      <a
-                        href="https://joaopedrolt.github.io/journey-frontend"
-                        target="_blank"
-                        class="box"
-                      >
-                        <i class="fa-solid fa-earth-americas"></i>
-                        <span class="span">Live Demo</span>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <img class="project-img" src="./projects/journey.jpg" alt="" />
-              </div>
-              <div class="project-card right">
-                <div class="card-wrapper">
-                  <div class="card-heading">
-                    <span class="date">2022</span>
-                    <span class="title">Travel Landing Page</span>
-                    <span class="tools">Hmtl / Sass / Js</span>
-                  </div>
-                  <div class="card-info">
-                    <div class="info-wrapper">
-                      <a
-                        href="https://github.com/joaopedrolt/travel-frontend"
-                        target="_blank"
-                        class="box"
-                      >
-                        <i class="fa-brands fa-github"></i>
-                        <span class="span">Documentação</span>
-                      </a>
-                      <a
-                        href="https://joaopedrolt.github.io/travel-frontend"
-                        target="_blank"
-                        class="box"
-                      >
-                        <i class="fa-solid fa-earth-americas"></i>
-                        <span class="span">Live Demo</span>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <img class="project-img" src="./projects/travel.jpg" alt="" />
-              </div>
+            <div class="box">
+              <h3>Situação Atual</h3>
+              <p>
+                Atualmente, atuo como desenvolvedor fullstack, responsável pelo planejamento e desenvolvimento de
+                aplicações críticas para monitoramento urbano, trânsito e gestão corporativa.
+              </p>
+              <a href="https://www.linkedin.com/in/joaopedrolt/" target="_blank" class="learn-more">Clique e saiba
+                mais.</a>
+            </div>
+            <div class="box">
+              <h3>Projetos Recentes</h3>
+              <ul>
+                <li>
+                  <a href="https://github.com/joaopedrolt/furvana-ecommerce" target="_blank"><i
+                      class="fas fa-arrow-right arrow"></i>Furvana</a>
+                </li>
+                <li>
+                  <a href="https://github.com/joaopedrolt/trembo-discordbot-nodejs" target="_blank"><i
+                      class="fas fa-arrow-right arrow"></i>Trembo Bot</a>
+                </li>
+                <li>
+                  <a href="https://github.com/joaopedrolt/whatsapp-clone-reactjs" target="_blank"><i
+                      class="fas fa-arrow-right arrow"></i>Clone WhatsApp
+                    Web</a>
+                </li>
+              </ul>
+            </div>
+            <div class="box">
+              <h3>Adicional</h3>
+              <ul>
+                <li><i class="fas fa-map"></i>Santo André, SP</li>
+                <li><i class="fa-solid fa-language"></i>Inglês avançado</li>
+                <li><i class="fas fa-phone"></i>+55 11 97694-1524</li>
+              </ul>
             </div>
           </div>
-        </section>
-        <section class="contact spacing">
-          <div class="container">
-            <div class="heading">
-              <h4>social</h4>
-              <h1>Informaçoes adicionais</h1>
-            </div>
-            <div class="social-container">
-              <div class="social-card">
-                <div class="icon-wrapper">
-                  <i class="fa-brands fa-github"></i>
-                  <div class="icon-circle"></div>
-                </div>
-                <p>joaopedrolt</p>
-                <a
-                  href="https://github.com/joaopedrolt"
-                  target="_blank"
-                  class="btn social-button"
-                  >Github</a
-                >
-              </div>
-              <div class="social-card">
-                <div class="icon-wrapper">
-                  <i class="fa-brands fa-instagram"></i>
-                  <div class="icon-circle"></div>
-                </div>
-                <p>@j_pedroll</p>
-                <a
-                  href="https://www.instagram.com/j_pedroll"
-                  target="_blank"
-                  class="btn social-button"
-                  >Instagram</a
-                >
-              </div>
-              <div class="social-card">
-                <div class="icon-wrapper">
-                  <i class="fa-brands fa-linkedin"></i>
-                  <div class="icon-circle"></div>
-                </div>
-                <p>joaopedrolt</p>
-                <a
-                  href="https://www.linkedin.com/in/joaopedrolt"
-                  target="_blank"
-                  class="btn social-button"
-                  >Linkedin</a
-                >
-              </div>
-              <div class="social-card">
-                <div class="icon-wrapper">
-                  <i class="fa-solid fa-envelope"></i>
-                  <div class="icon-circle"></div>
-                </div>
-                <p>joaopedrolimateixeira@outlook.com</p>
-                <a
-                  href="mailto:joaopedrolimateixeira@outlook.com"
-                  class="btn social-button"
-                  >E-mail</a
-                >
-              </div>
-            </div>
-            <div class="form-container" id="form-container">
-              <div class="text-container" id="work-together">
-                <h4>Se interessou?</h4>
-                <h1 class="title">
-                  Vamos trabalhar juntos
-                  <div id="contact-arrow">&#8594;</div>
-                </h1>
-              </div>
-            </div>
-          </div>
-        </section>
-        <footer class="footer">
-          <div class="container">
-            <div class="box-container">
-              <div class="box">
-                <h3>JOAOPEDROLT</h3>
-                <p>
-                  Sinta-se à vontade para entrar em contato comigo a qualquer
-                  momento.
-                </p>
-                <span
-                  >©2021 João Pedro Lima Teixeira. Todos os direitos reservados.
-                  Brasil, São Paulo.</span
-                >
-              </div>
-              <div class="box">
-                <h3>Situação Atual</h3>
-                <p>
-                  Atualmente, estou dedicado a aprimorar meus conhecimentos para
-                  poder me inserir no mercado de trabalho de forma assertiva.
-                </p>
-                <p>Atuando como freelancer.</p>
-              </div>
-              <div class="box">
-                <h3>Projetos Recentes</h3>
-                <ul>
-                  <li>
-                    <a
-                      href="https://github.com/joaopedrolt/travel-frontend"
-                      target="_blank"
-                      ><i class="fas fa-arrow-right arrow"></i>Travel</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      href="https://github.com/joaopedrolt/journey-frontend"
-                      target="_blank"
-                      ><i class="fas fa-arrow-right arrow"></i>Journey</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      href="https://github.com/joaopedrolt/whatsapp-clone-reactjs"
-                      target="_blank"
-                      ><i class="fas fa-arrow-right arrow"></i>Clone WhatsApp
-                      Web</a
-                    >
-                  </li>
-                </ul>
-              </div>
-              <div class="box">
-                <h3>Adicional</h3>
-                <ul>
-                  <li><i class="fas fa-map"></i>Santo André, SP</li>
-                  <li><i class="fa-solid fa-language"></i>Inglês avançado</li>
-                  <li><i class="fas fa-phone"></i>+55 11 97694-1524</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </footer>
-      </div>
+        </div>
+      </footer>
     </div>
-    <script type="module" src="/main.js"></script>
-  </body>
+  </div>
+  <script type="module" src="/main.js"></script>
+</body>
+
 </html>

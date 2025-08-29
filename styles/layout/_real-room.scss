@@ -1,0 +1,66 @@
+.real-room {
+  .container {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+
+    @media (max-width: $tablet) {
+      flex-direction: column;
+      gap: 30px;
+    }
+  }
+
+  .media {
+    flex: 1;
+
+    .image-wrapper {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      border-radius: 12px;
+      border: 1px solid var(--color-text-fade);
+      background: var(--color-bg);
+
+      img {
+        display: block;
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+      }
+    }
+  }
+
+  .content {
+    flex: 1;
+
+    .heading {
+      text-align: left;
+      margin-bottom: 20px;
+
+      @media (max-width: $tablet) {
+        text-align: center;
+      }
+
+      h1 {
+        /*  margin: 15px 0 10px 0; */
+        text-transform: uppercase;
+        line-height: 1.35;
+      }
+    }
+
+    .description {
+      color: var(--color-text-fade);
+      margin-bottom: 14px;
+    }
+
+    .note {
+      font-size: 0.9rem;
+      color: var(--color-text-fade);
+      opacity: 0.9;
+    }
+
+    @media (max-width: $tablet) {
+      text-align: center;
+    }
+  }
+}

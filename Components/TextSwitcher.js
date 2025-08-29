@@ -7,12 +7,16 @@ export default class TextSwitcher {
     this.counter = 1;
     this.switchingDelay = 4000;
 
-    setInterval(() => {
-      this.switchText();
-    }, 4000);
+    // Only initialize if the required elements exist on the page
+    if (this.textID && this.ghostID) {
+      this.interval = setInterval(() => {
+        this.switchText();
+      }, this.switchingDelay);
+    }
   }
 
   switchText() {
+    if (!this.textID || !this.ghostID) return;
     this.textID.classList.add("switching");
 
     if (this.counter == 2) {
@@ -25,7 +29,7 @@ export default class TextSwitcher {
     this.ghostID.textContent = this.texts[this.counter];
 
     setTimeout(() => {
-      this.textID.classList.remove("switching");
+      if (this.textID) this.textID.classList.remove("switching");
     }, 1000);
 
     if (this.counter != 2) {
